@@ -10,7 +10,7 @@ const config = {
   output: {
     format: 'umd'
   },
-  name: 'vally,
+  name: 'vally',
   plugins: [
     babel({
       exclude: 'node_modules/**',

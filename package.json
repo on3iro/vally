@@ -38,7 +38,7 @@
     "test:watch": "cross-env NODE_ENV=test jest --watch",
     "test:coveralls": "cross-env NODE_ENV=test jest --coverage --runInBand && cat ./coverage/lcov.info | coveralls",
     "docs": "cross-env BABEL_ENV=es jsdoc src -r -c jsdoc.conf.json -d docs -R README.md",
-    "precommit": "npm run docs && git add ."
+    "postversion": "npm run docs && git add . && git commit --amend --no-edit"
   },
   "jest": {
     "modulePaths": [
@@ -73,7 +73,8 @@
       "describe",
       "it",
       "expect",
-      "HTMLElement"
+      "HTMLElement",
+      "Document"
     ]
   },
   "license": "MIT",
@@ -90,7 +91,7 @@
   "engines": {},
   "devDependencies": {
     "babel-core": "6.26.0",
-    "babel-eslint": "8.2.1",
+    "babel-eslint": "8.0.3",
     "babel-jest": "22.0.4",
     "babel-plugin-external-helpers": "6.22.0",
     "babel-preset-env": "1.6.1",
@@ -101,7 +102,6 @@
     "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.41.0",
     "flow-bin": "^0.63.1",
-    "husky": "0.14.3",
     "jest": "22.0.5",
     "jsdoc": "3.5.5",
     "jsdoc-babel": "0.3.0",

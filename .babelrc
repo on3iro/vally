@@ -1,0 +1,47 @@
+{
+  "env": {
+    "es": {
+      "ignore": [
+        "**/*.test.js"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "useBuiltIns": false,
+            "modules": false
+          }
+        ],
+        "flow",
+        "stage-3"
+      ]
+    },
+    "commonjs": {
+      "ignore": [
+        "**/*.test.js"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "useBuiltIns": false
+          }
+        ],
+        "flow",
+        "stage-3"
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "modules": "commonjs"
+          }
+        ],
+        "flow",
+        "stage-3"
+      ]
+    }
+  }
+}

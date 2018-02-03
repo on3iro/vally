@@ -1,0 +1,23 @@
+[ignore]
+.*/__tests__/.*
+.*/.+\.test.js
+.*/node_modules/.*
+
+[include]
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+# Uncomment the following line to run all watched files through flow
+# This way no explicit // @flow comment in files is necessary
+# all=true
+emoji=true
+
+module.name_mapper='^index' -> '<PROJECT_ROOT>/src/index.js'
+
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json

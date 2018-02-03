@@ -1,0 +1,115 @@
+{
+  "name": "vally",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index/js",
+  "files": [
+    "dist",
+    "es",
+    "lib",
+    "src"
+  ],
+  "description": "ES6 form field validation library",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:on3iro/vally.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/on3iro/vally/issues"
+  },
+  "scripts": {
+    "clean": "rimraf dist lib es",
+    "prepublishOnly": "npm run lint && npm run flow && npm run test && npm run build",
+    "prebuild": "npm run clean",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c -i src/index.js -o dist/vally.js",
+    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -i src/index.js -o dist/vally.min.js",
+    "flow": "flow",
+    "lint": "standard --parser babel-eslint",
+    "lint:fix": "standard --parser babel-eslint --fix",
+    "test:clean": "rimraf ./coverage",
+    "pretest": "npm run test:clean",
+    "test": "cross-env NODE_ENV=test jest --verbose",
+    "test:coverage": "cross-env NODE_ENV=test jest --coverage",
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
+    "test:coveralls": "cross-env NODE_ENV=test jest --coverage --runInBand && cat ./coverage/lcov.info | coveralls",
+    "docs": "cross-env BABEL_ENV=es jsdoc src -r -c jsdoc.conf.json -d docs -R README.md",
+    "precommit": "npm run docs && git add ."
+  },
+  "jest": {
+    "modulePaths": [
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "collectCoverageFrom": [
+      "**/src/**/*.{js}"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpeg|jpg|png|gif|eot|webp|svg|ttf|woff2|mp3|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": "flowtype",
+    "ignore": [
+      "**/dist/",
+      "**/flow-typed",
+      "**/docs"
+    ],
+    "globals": [
+      "jest",
+      "describe",
+      "it",
+      "expect",
+      "HTMLElement"
+    ]
+  },
+  "license": "MIT",
+  "private": false,
+  "author": {
+    "name": "Theo Salzmann",
+    "email": "dev@on3iro.de"
+  },
+  "contributors": [],
+  "homepage": "-",
+  "dependencies": {
+    "babel-polyfill": "6.26.0"
+  },
+  "engines": {},
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-eslint": "8.2.1",
+    "babel-jest": "22.0.4",
+    "babel-plugin-external-helpers": "6.22.0",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-flow": "6.23.0",
+    "babel-preset-stage-3": "6.24.1",
+    "coveralls": "3.0.0",
+    "cross-env": "5.1.3",
+    "eslint-loader": "1.9.0",
+    "eslint-plugin-flowtype": "2.41.0",
+    "flow-bin": "^0.63.1",
+    "husky": "0.14.3",
+    "jest": "22.0.5",
+    "jsdoc": "3.5.5",
+    "jsdoc-babel": "0.3.0",
+    "rimraf": "2.6.2",
+    "rollup": "0.53.4",
+    "rollup-plugin-babel": "3.0.3",
+    "rollup-plugin-replace": "2.0.0",
+    "rollup-plugin-uglify": "2.0.1",
+    "standard": "10.0.3"
+  }
+}

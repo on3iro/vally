@@ -69,6 +69,8 @@ var isUndefined = function isUndefined(val) {
 // public validators //
 
 /**
+ * Validates if a value is undefined or its length === 0
+ *
   * @function isEmpty
   * @memberof validators
   * @param {string} val
@@ -275,6 +277,7 @@ var makeValidate = function makeValidate(config) {
 var vally = {
   validate: validate,
   isEmail: isEmail,
+  isEmpty: isEmpty,
   isNoneEmptyString: isNoneEmptyString,
   isNumberString: isNumberString,
   isString: isString,
@@ -284,6 +287,7 @@ var vally = {
 
 exports.vally = vally;
 exports.isEmail = isEmail;
+exports.isEmpty = isEmpty;
 exports.isNoneEmptyString = isNoneEmptyString;
 exports.isNumberString = isNumberString;
 exports.isString = isString;

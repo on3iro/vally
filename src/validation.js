@@ -130,17 +130,13 @@ const validate = ({
     // $FlowFixMe
     const fieldVal = fieldNode.value
     const fieldIsEmpty = isEmpty(fieldVal)
-
-    if (f.isRequired && fieldIsEmpty) {
-      return false
-    } else if (fieldIsEmpty) {
-      return true
-    }
+    const isRequired = f.isRequired || false // default
+    const fieldNotReqButEmpty = !isRequired && fieldIsEmpty // -> isValid
 
     // if there is no errorSelector specified we automatically
     // assume that the error class should be added to the input itself
     const errTarget = getTarget(container, f.errorSelector, fieldNode)
-    const fieldIsValid = validateValue(fieldVal, f.validators)
+    const fieldIsValid = fieldNotReqButEmpty || validateValue(fieldVal, f.validators)
 
     toggleErrorClass(f.errorClass, fieldIsValid, errTarget)
 

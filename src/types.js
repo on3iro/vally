@@ -4,6 +4,7 @@ export type Validator = (val:any) => boolean
 
 export type Field = {|
   selector: string,
+  isRequired?: boolean,
   errorSelector?: string,
   errorClass?: string,
   validators: Array<Validator>

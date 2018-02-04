@@ -63,6 +63,8 @@ export const isNumber:Validator = (val:any):boolean => typeof val === 'number'
 // public validators //
 
 /**
+ * Validates if a value is undefined or its length === 0
+ *
   * @function isEmpty
   * @memberof validators
   * @param {string} val

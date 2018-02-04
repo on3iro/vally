@@ -8,6 +8,7 @@ import {
 
 import {
   isEmail,
+  isEmpty,
   isNoneEmptyString,
   isNumberString,
   isString
@@ -16,6 +17,7 @@ import {
 const vally = {
   validate,
   isEmail,
+  isEmpty,
   isNoneEmptyString,
   isNumberString,
   isString,
@@ -26,6 +28,7 @@ const vally = {
 export {
   vally,
   isEmail,
+  isEmpty,
   isNoneEmptyString,
   isNumberString,
   isString,

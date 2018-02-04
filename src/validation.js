@@ -9,29 +9,83 @@ import type {
   Validator
 } from './types'
 
+import {
+  isEmpty
+} from './validators'
+
 /**
- * Consecutively applies a string to each function of the validators array.
+ * Consecutively applies a value to each function of the validators array.
  * If any validator fails this returns false. Otherwise if all fns pass it returns
  * true.
  *
-  * @function validateString
+  * @function validateValue
   * @memberof validation
-  * @param {string} str - String to validate
+  * @param {any} value - value to validate
   * @param {Array<Validator>} validators - Array of Validator functions
   * @return {boolean}
   */
-const validateString = (
-  str: string,
+const validateValue = (
+  val: any,
   validators: Array<Validator>
 ):boolean => validators.reduce((acc, validator) => {
   if (!acc) return acc
 
-  return validator(str)
+  return validator(val)
 }, true)
+
+/**
+ * Finds a specified node inside a container and returns it.
+ * If no selector is specified or the node could not be found, the fallback
+ * node will be returned
+ *
+  * @function getTarget
+  * @memberof validation
+  * @private
+  * @param {HTMLElement} container - Container to search in
+  * @param {string} selector - querySelector compatible string
+  * @param {HTMLElement} fallback - fallback node
+  * @return {HTMLElement}
+  */
+const getTarget = (
+  container: HTMLElement,
+  selector: ?string,
+  fallback: HTMLElement
+) => {
+  const tmpTarget = selector
+    ? container.querySelector(selector)
+    : null
+
+  const target = tmpTarget || fallback
+
+  return target
+}
+
+/**
+ * Adds or removes a specified CSS class from a target element if the condition is true/false
+ *
+  * @function toggleErrorClass
+  * @memberof validation
+  * @private
+  * @param {string} errCls - class to toggle. Default: 'error'
+  * @param {boolean} isValid - condition which determines if class should be added or removed
+  * @param {HTMLElement} target - target to toggle class on
+  */
+const toggleErrorClass = (
+  errCls:string = 'error',
+  isValid: boolean,
+  target: HTMLElement
+):void => {
+  if (isValid) {
+    target.classList.remove(errCls)
+  } else {
+    target.classList.add(errCls)
+  }
+}
 
 /**
  * Collects all specified fields from inside a container element and applies each field to a set of validator functions. If validation fails on any field the function returns false. Otherwise it returns true.
  * If a field contains any validation error a specified error class is added to the specified element. If it does not contain errors the class is removed again.
+ * Hidden (display: "none") fields are ignored.
  *
   * @function validate
   * @memberof validation
@@ -40,6 +94,7 @@ const validateString = (
   * to get the wrapping element to look for fields. Defaults to 'body'. (optional)
   * @param {Array<Field>} config.fields - array of field objects
   * @param {Object} config.fields.field - a field object
+  * @param {boolean} config.fields.field.isRequired - default: false
   * @param {string} config.fields.field.selector - querySelector compatible string. Used to get the input node. (Required)
   * @param {string} config.fields.field.errorSelector - querySelector compatible string. Used to get the element to add the errorClass to. Defaults to the input element itself. (optional)
   * @param {string} config.fields.field.errorClass - CSS class to add to the specified DOM element. Defaults to 'error'. (optional)
@@ -53,8 +108,6 @@ const validate = ({
 }:Config) => {
   const doc = DOMStub || window.document
   const container = doc.querySelector(containerSelector)
-
-  const defaultErrorClass = 'error'
 
   if (!container) {
     console.warn(`vally: The specified container "${containerSelector}" does not exist!`)
@@ -72,29 +125,24 @@ const validate = ({
     }
 
     const isHidden = fieldNode.style.display === 'none'
-
     if (isHidden) return true
 
     // $FlowFixMe
     const fieldVal = fieldNode.value
+    const fieldIsEmpty = isEmpty(fieldVal)
+
+    if (f.isRequired && fieldIsEmpty) {
+      return false
+    } else if (fieldIsEmpty) {
+      return true
+    }
 
     // if there is no errorSelector specified we automatically
     // assume that the error class should be added to the input itself
-    const errTarget = f.errorSelector
-      ? container.querySelector(f.errorSelector)
-      : null
+    const errTarget = getTarget(container, f.errorSelector, fieldNode)
+    const fieldIsValid = validateValue(fieldVal, f.validators)
 
-    const target = errTarget || fieldNode
-
-    const errorCls = f.errorClass || defaultErrorClass
-
-    const fieldIsValid = validateString(fieldVal, f.validators)
-
-    if (!fieldIsValid) {
-      target.classList.add(errorCls)
-    } else {
-      target.classList.remove(errorCls)
-    }
+    toggleErrorClass(f.errorClass, fieldIsValid, errTarget)
 
     return fieldIsValid
   }, true)
@@ -113,6 +161,6 @@ const makeValidate = (config: Config) => () => validate(config)
 
 export {
   validate,
-  validateString,
+  validateValue,
   makeValidate
 }

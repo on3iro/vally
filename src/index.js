@@ -2,7 +2,7 @@
 
 import {
   validate,
-  validateString,
+  validateValue,
   makeValidate
 } from './validation'
 
@@ -20,7 +20,7 @@ const vally = {
   isNumberString,
   isString,
   makeValidate,
-  validateString
+  validateValue
 }
 
 export {
@@ -31,5 +31,5 @@ export {
   isString,
   makeValidate,
   validate,
-  validateString
+  validateValue
 }

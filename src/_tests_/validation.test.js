@@ -40,6 +40,9 @@ describe('validate()', () => {
       classList: {
         add: jest.fn(),
         remove: jest.fn()
+      },
+      style: {
+        display: ''
       }
     }
   }
@@ -58,6 +61,13 @@ describe('validate()', () => {
       '.input_2': {
         ...nodeFactory(),
         value: '22'
+      },
+      '.input_3': {
+        ...nodeFactory(),
+        value: 'something',
+        style: {
+          display: 'none'
+        }
       }
     }
 
@@ -173,4 +183,25 @@ describe('validate()', () => {
     const fieldNode = DOMStub.body['.input_1']
     expect(fieldNode.classList.remove).toHaveBeenCalledWith('error')
   })
+
+  it('should simply return true for hidden fields', () => {
+    const { isValid } = setUp({
+      fields: [
+        {
+          selector: '.input_3',
+          validators: [ isNumberString ]
+        }
+      ]
+    })
+
+    expect(isValid).toBe(true)
+  })
+
+  it('should handle isRequired flag === true and return false if field is empty')
+
+  it('should handle isRequired flag === false and skip other checks if field is empty')
 }) // end validate()
+
+describe('makeValidate()', () => {
+  it('should return pre-configured validate function')
+}) // end makeValidate()

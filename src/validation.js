@@ -71,13 +71,12 @@ const validate = ({
       return false
     }
 
+    const isHidden = fieldNode.style.display === 'none'
+
+    if (isHidden) return true
+
     // $FlowFixMe
     const fieldVal = fieldNode.value
-    if (!fieldVal) {
-      console.warn(`vally: The specified field "${f.selector}" does not seem to be a valid <input> element. Can't access "value"!`)
-
-      return false
-    }
 
     // if there is no errorSelector specified we automatically
     // assume that the error class should be added to the input itself

@@ -15,27 +15,17 @@ import {
   isString
 } from './validators'
 
-const vally = {
-  isEmail,
-  isEmpty,
-  isNoneEmptyString,
-  isNumberString,
-  isString,
-  makeValidate,
-  makeValidationWithBlurBindings,
-  validate,
-  validateValue
-}
+// Validators //
 
-export {
-  vally,
-  isEmail,
-  isEmpty,
-  isNoneEmptyString,
-  isNumberString,
-  isString,
-  makeValidate,
-  makeValidationWithBlurBindings,
-  validate,
-  validateValue
-}
+export { isEmail }
+export { isEmpty }
+export { isNoneEmptyString }
+export { isNumberString }
+export { isString }
+
+// Validation functions //
+
+export { validateValue }
+export { makeValidate }
+export { validate }
+export { makeValidationWithBlurBindings }

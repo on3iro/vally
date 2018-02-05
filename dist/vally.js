@@ -226,8 +226,6 @@ var validate = function validate(_ref) {
   }
 
   var formIsValid = fields.reduce(function (acc, f) {
-    if (!acc) return acc;
-
     var fieldNode = container.querySelector(f.selector);
 
     if (!fieldNode) {
@@ -237,7 +235,7 @@ var validate = function validate(_ref) {
 
     var isHidden = fieldNode.style.display === 'none' || fieldNode.hidden === true || fieldNode instanceof HTMLInputElement && fieldNode.type === 'hidden';
 
-    if (isHidden) return true;
+    if (isHidden) return true && acc;
 
     // $FlowFixMe
     var fieldVal = fieldNode.value;
@@ -252,7 +250,7 @@ var validate = function validate(_ref) {
 
     toggleErrorClass(f.errorClass, fieldIsValid, errTarget);
 
-    return fieldIsValid;
+    return fieldIsValid && acc;
   }, true);
 
   return formIsValid;

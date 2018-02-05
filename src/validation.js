@@ -167,7 +167,7 @@ const makeValidate = (config: Config): Function => ():boolean => validate(config
   * @memberof validation
   * @public
   * @param {Config} config - see validate fucntion for detailed explaination of the config object
-  * @return {() =>  Array<RemoveListeners>} removeListeners - Array of removeEventListener functions to remove the blur events if necessary
+  * @return {Function} () => Array<Function> - returns a initializer Function, which returns an array of removeEventListener functions
   */
 const makeValidationWithBlurBindings = ({
   containerSelector = 'body',

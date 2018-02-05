@@ -115,8 +115,6 @@ const validate = ({
   }
 
   const formIsValid = fields.reduce((acc, f) => {
-    if (!acc) return acc
-
     const fieldNode = container.querySelector(f.selector)
 
     if (!fieldNode) {
@@ -130,7 +128,7 @@ const validate = ({
       (fieldNode instanceof HTMLInputElement && fieldNode.type === 'hidden')
     )
 
-    if (isHidden) return true
+    if (isHidden) return (true && acc)
 
     // $FlowFixMe
     const fieldVal = fieldNode.value
@@ -145,7 +143,7 @@ const validate = ({
 
     toggleErrorClass(f.errorClass, fieldIsValid, errTarget)
 
-    return fieldIsValid
+    return fieldIsValid && acc
   }, true)
 
   return formIsValid

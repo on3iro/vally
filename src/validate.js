@@ -1,12 +1,13 @@
 // @flow
 
 /**
-  * @namespace validation
+  * @namespace validate
   */
 
+import validateValue from './validateValue'
+
 import type {
-  Config,
-  Validator
+  Config
 } from './types'
 
 import {
@@ -14,32 +15,12 @@ import {
 } from './validators'
 
 /**
- * Consecutively applies a value to each function of the validators array.
- * If any validator fails this returns false. Otherwise if all fns pass it returns
- * true.
- *
-  * @function validateValue
-  * @memberof validation
-  * @param {any} value - value to validate
-  * @param {Array<Validator>} validators - Array of Validator functions
-  * @return {boolean}
-  */
-const validateValue = (
-  val: any,
-  validators: Array<Validator>
-):boolean => validators.reduce((acc, validator) => {
-  if (!acc) return acc
-
-  return validator(val)
-}, true)
-
-/**
  * Finds a specified node inside a container and returns it.
  * If no selector is specified or the node could not be found, the fallback
  * node will be returned
  *
   * @function getTarget
-  * @memberof validation
+  * @memberof validate
   * @private
   * @param {HTMLElement} container - Container to search in
   * @param {string} selector - querySelector compatible string
@@ -64,7 +45,7 @@ const getTarget = (
  * Adds or removes a specified CSS class from a target element if the condition is true/false
  *
   * @function toggleErrorClass
-  * @memberof validation
+  * @memberof validate
   * @private
   * @param {string} errCls - class to toggle. Default: 'error'
   * @param {boolean} isValid - condition which determines if class should be added or removed
@@ -88,7 +69,7 @@ const toggleErrorClass = (
  * Hidden (display: "none") fields are ignored.
  *
   * @function validate
-  * @memberof validation
+  * @memberof validate
   * @param {Config} config - Configuration object
   * @param {string} config.containerSelector - querySelector compatible string. Used
   * to get the wrapping element to look for fields. Defaults to 'body'. (optional)
@@ -150,66 +131,4 @@ const validate = ({
   return formIsValid
 }
 
-/**
-  * Simple higher-order function for the purpose of convenience. Creates a preconfigured validate() function, that can be used throughout your app.
-  * @function makeValidate
-  * @memberof validation
-  * @param {Config} config - See validate function for a detailed explanaition of the config object
-  * @return {Function} - validate function
-  */
-const makeValidate = (config: Config): Function => ():boolean => validate(config)
-
-/**
-  * Returns a function that initialilzes validation with the specified configuration.
-  * An onBlur EventListener with a single field validation callback will be added to each respective input field.
-  *
-  * @function makeValidationWithBlurBindings
-  * @memberof validation
-  * @public
-  * @param {Config} config - see validate fucntion for detailed explaination of the config object
-  * @return {Function} () => Array<Function> - returns a initializer Function, which returns an array of removeEventListener functions
-  */
-const makeValidationWithBlurBindings = ({
-  containerSelector = 'body',
-  fields,
-  DOMStub
-}: Config): Function => (): Array<() => void> => {
-  const warnBaseStr = 'vally, makeValidationWithBlurBindings():'
-
-  const doc = DOMStub || window.document
-  const container = doc.querySelector(containerSelector)
-
-  if (!container) {
-    console.warn(`${warnBaseStr} Container "${containerSelector}" could not be found!`)
-    return []
-  }
-
-  const removeListeners = fields.map(f => {
-    const fNode = container.querySelector(f.selector)
-
-    if (!fNode) {
-      console.warn(`${warnBaseStr} The field ${f.selector} could not be found!`)
-      return () => undefined
-    }
-
-    const validateF = makeValidate({
-      containerSelector,
-      fields: [
-        f
-      ]
-    })
-
-    fNode.addEventListener('blur', validateF)
-
-    return () => fNode.removeEventListener('blur', validateF)
-  })
-
-  return removeListeners
-}
-
-export {
-  validate,
-  validateValue,
-  makeValidate,
-  makeValidationWithBlurBindings
-}
+export default validate

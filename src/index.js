@@ -1,11 +1,9 @@
 // @flow
 
-import {
-  validate,
-  validateValue,
-  makeValidate,
-  makeValidationWithBlurBindings
-} from './validation'
+import validate from './validate'
+import validateValue from './validateValue'
+import makeValidate from './makeValidate'
+import makeValidationWithBlurBindings from './makeValidationWithBlurBindings'
 
 import {
   isEmail,

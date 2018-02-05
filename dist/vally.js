@@ -4,6 +4,24 @@
 	(factory((global.vally = {})));
 }(this, (function (exports) { 'use strict';
 
+/**
+ * Consecutively applies a value to each function of the validators array.
+ * If any validator fails this returns false. Otherwise if all fns pass it returns
+ * true.
+ *
+  * @function validateValue
+  * @param {any} value - value to validate
+  * @param {Array<Validator>} validators - Array of Validator functions
+  * @return {boolean}
+  */
+var validateValue = function validateValue(val, validators) {
+  return validators.reduce(function (acc, validator) {
+    if (!acc) return acc;
+
+    return validator(val);
+  }, true);
+};
+
 // private validators //
 
 /**
@@ -125,29 +143,8 @@ var isEmail = function isEmail(val) {
 };
 
 /**
- * Consecutively applies a value to each function of the validators array.
- * If any validator fails this returns false. Otherwise if all fns pass it returns
- * true.
- *
-  * @function validateValue
-  * @memberof validation
-  * @param {any} value - value to validate
-  * @param {Array<Validator>} validators - Array of Validator functions
-  * @return {boolean}
+  * @namespace validate
   */
-
-
-/**
-  * @namespace validation
-  */
-
-var validateValue = function validateValue(val, validators) {
-  return validators.reduce(function (acc, validator) {
-    if (!acc) return acc;
-
-    return validator(val);
-  }, true);
-};
 
 /**
  * Finds a specified node inside a container and returns it.
@@ -155,7 +152,7 @@ var validateValue = function validateValue(val, validators) {
  * node will be returned
  *
   * @function getTarget
-  * @memberof validation
+  * @memberof validate
   * @private
   * @param {HTMLElement} container - Container to search in
   * @param {string} selector - querySelector compatible string
@@ -174,7 +171,7 @@ var getTarget = function getTarget(container, selector, fallback) {
  * Adds or removes a specified CSS class from a target element if the condition is true/false
  *
   * @function toggleErrorClass
-  * @memberof validation
+  * @memberof validate
   * @private
   * @param {string} errCls - class to toggle. Default: 'error'
   * @param {boolean} isValid - condition which determines if class should be added or removed
@@ -198,12 +195,12 @@ var toggleErrorClass = function toggleErrorClass() {
  * Hidden (display: "none") fields are ignored.
  *
   * @function validate
-  * @memberof validation
+  * @memberof validate
   * @param {Config} config - Configuration object
   * @param {string} config.containerSelector - querySelector compatible string. Used
   * to get the wrapping element to look for fields. Defaults to 'body'. (optional)
-  * @param {Array<Field>} config.fields - array of field objects
-  * @param {Object} config.fields.field - a field object
+  * @param {Fields} config.fields - array of field objects
+  * @param {Field} config.fields.field - a field object
   * @param {string} config.fields.field.selector - querySelector compatible string. Used to get the input node. (Required)
   * @param {string} config.fields.field.errorSelector - querySelector compatible string. Used to get the element to add the errorClass to. Defaults to the input element itself. (optional)
   * @param {string} config.fields.field.errorClass - CSS class to add to the specified DOM element. Defaults to 'error'. (optional)
@@ -258,35 +255,46 @@ var validate = function validate(_ref) {
 };
 
 /**
-  * Simple higher-order function for the purpose of convenience. Creates a preconfigured validate() function, that can be used throughout your app.
+  * Simple higher-order function for the purpose of convenience. Creates a preconfigured validate() function, that can be used throughout your app. In addition this provides a second errCallback parameter, that can pass in.
   * @function makeValidate
   * @memberof validation
   * @param {Config} config - See validate function for a detailed explanaition of the config object
+  * @param {Function} errCallback - Callbackfunction that is invoked if validation fails, with the configuration as its first argument
   * @return {Function} - validate function
   */
-var makeValidate = function makeValidate(config) {
+var makeValidate = function makeValidate(config, errCallback) {
   return function () {
-    return validate(config);
+    var isValid = validate(config);
+
+    if (isValid) return isValid;
+
+    if (errCallback) errCallback(config);
+
+    return isValid;
   };
 };
 
 /**
-  * Initialilzes validation with the specified configuration.
+  * Returns a function that initialilzes validation with the specified configuration.
   * An onBlur EventListener with a single field validation callback will be added to each respective input field.
   *
   * @function makeValidationWithBlurBindings
   * @memberof validation
+  * @public
   * @param {Config} config - see validate fucntion for detailed explaination of the config object
-  * @return {Array<RemoveListeners>} removeListeners - Array of removeEventListener functions to remove the blur events if necessary
+  * @param {Function} errCallback - a callback function that gets called whenever a field fails validation
+  * @return {Function} () => Array<Function> - returns a initializer Function, which returns an array of removeEventListener functions
   */
-var makeValidationWithBlurBindings = function makeValidationWithBlurBindings(_ref2) {
-  var _ref2$containerSelect = _ref2.containerSelector,
-      containerSelector = _ref2$containerSelect === undefined ? 'body' : _ref2$containerSelect,
-      fields = _ref2.fields;
+var makeValidationWithBlurBindings = function makeValidationWithBlurBindings(_ref, errCallback) {
+  var _ref$containerSelecto = _ref.containerSelector,
+      containerSelector = _ref$containerSelecto === undefined ? 'body' : _ref$containerSelecto,
+      fields = _ref.fields,
+      DOMStub = _ref.DOMStub;
   return function () {
     var warnBaseStr = 'vally, makeValidationWithBlurBindings():';
 
-    var container = document.querySelector(containerSelector);
+    var doc = DOMStub || window.document;
+    var container = doc.querySelector(containerSelector);
 
     if (!container) {
       console.warn(warnBaseStr + ' Container "' + containerSelector + '" could not be found!');
@@ -306,7 +314,7 @@ var makeValidationWithBlurBindings = function makeValidationWithBlurBindings(_re
       var validateF = makeValidate({
         containerSelector: containerSelector,
         fields: [f]
-      });
+      }, errCallback);
 
       fNode.addEventListener('blur', validateF);
 
@@ -319,28 +327,15 @@ var makeValidationWithBlurBindings = function makeValidationWithBlurBindings(_re
   };
 };
 
-var vally = {
-  isEmail: isEmail,
-  isEmpty: isEmpty,
-  isNoneEmptyString: isNoneEmptyString,
-  isNumberString: isNumberString,
-  isString: isString,
-  makeValidate: makeValidate,
-  makeValidationWithBlurBindings: makeValidationWithBlurBindings,
-  validate: validate,
-  validateValue: validateValue
-};
-
-exports.vally = vally;
 exports.isEmail = isEmail;
 exports.isEmpty = isEmpty;
 exports.isNoneEmptyString = isNoneEmptyString;
 exports.isNumberString = isNumberString;
 exports.isString = isString;
-exports.makeValidate = makeValidate;
-exports.makeValidationWithBlurBindings = makeValidationWithBlurBindings;
-exports.validate = validate;
 exports.validateValue = validateValue;
+exports.makeValidate = makeValidate;
+exports.validate = validate;
+exports.makeValidationWithBlurBindings = makeValidationWithBlurBindings;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -75,6 +75,7 @@
       "it",
       "expect",
       "HTMLElement",
+      "HTMLInputElement",
       "Document"
     ]
   },

@@ -124,7 +124,12 @@ const validate = ({
       return false
     }
 
-    const isHidden = fieldNode.style.display === 'none'
+    const isHidden = (
+      fieldNode.style.display === 'none' ||
+      fieldNode.hidden === true ||
+      (fieldNode instanceof HTMLInputElement && fieldNode.type === 'hidden')
+    )
+
     if (isHidden) return true
 
     // $FlowFixMe

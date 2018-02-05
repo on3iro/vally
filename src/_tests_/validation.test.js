@@ -23,9 +23,6 @@ const nodeFactory = () => {
     classList: {
       add: jest.fn(),
       remove: jest.fn()
-    },
-    style: {
-      display: ''
     }
   }
 }
@@ -71,9 +68,7 @@ describe('validate()', () => {
       '.input_hidden': {
         ...nodeFactory(),
         value: 'something',
-        style: {
-          display: 'none'
-        }
+        offsetParent: null
       },
       '.input_undefined': {
         ...nodeFactory(),

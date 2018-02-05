@@ -19,7 +19,7 @@ const makeValidationWithBlurBindings = ({
   fields,
   DOMStub
 }: Config,
-  errCallback: Function
+  errCallback: ?Function
 ): Function => (): Array<() => void> => {
   const warnBaseStr = 'vally, makeValidationWithBlurBindings():'
 

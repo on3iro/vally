@@ -15,17 +15,16 @@ import {
   isString
 } from './validators'
 
-// Validators //
-
-export { isEmail }
-export { isEmpty }
-export { isNoneEmptyString }
-export { isNumberString }
-export { isString }
-
-// Validation functions //
-
-export { validateValue }
-export { makeValidate }
-export { validate }
-export { makeValidationWithBlurBindings }
+export {
+  // validators
+  isEmail,
+  isEmpty,
+  isNoneEmptyString,
+  isNumberString,
+  isString,
+  // validation
+  validateValue,
+  makeValidate,
+  validate,
+  makeValidationWithBlurBindings
+}

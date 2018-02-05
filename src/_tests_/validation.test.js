@@ -73,6 +73,11 @@ describe('validate()', () => {
       '.input_undefined': {
         ...nodeFactory(),
         value: undefined
+      },
+      '.input_required_undefined': {
+        ...nodeFactory(),
+        value: undefined,
+        required: true
       }
     }
 
@@ -207,8 +212,7 @@ describe('validate()', () => {
     const { isValid } = setUp({
       fields: [
         {
-          selector: '.input_undefined',
-          isRequired: true,
+          selector: '.input_required_undefined',
           validators: [ isNumberString ]
         }
       ]
@@ -222,7 +226,6 @@ describe('validate()', () => {
       fields: [
         {
           selector: '.input_undefined',
-          isRequired: false,
           validators: [ isNumberString ]
         }
       ]

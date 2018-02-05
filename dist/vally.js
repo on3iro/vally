@@ -204,7 +204,6 @@ var toggleErrorClass = function toggleErrorClass() {
   * to get the wrapping element to look for fields. Defaults to 'body'. (optional)
   * @param {Array<Field>} config.fields - array of field objects
   * @param {Object} config.fields.field - a field object
-  * @param {boolean} config.fields.field.isRequired - default: false
   * @param {string} config.fields.field.selector - querySelector compatible string. Used to get the input node. (Required)
   * @param {string} config.fields.field.errorSelector - querySelector compatible string. Used to get the element to add the errorClass to. Defaults to the input element itself. (optional)
   * @param {string} config.fields.field.errorClass - CSS class to add to the specified DOM element. Defaults to 'error'. (optional)
@@ -235,15 +234,19 @@ var validate = function validate(_ref) {
 
     var isHidden = fieldNode.offsetParent === null;
 
+    // FlowFixMes are necessary for easier mocking inside unit tests
+    // We should fix this in the future, though...
     // $FlowFixMe
     var fieldVal = fieldNode.value;
     var fieldIsEmpty = isEmpty(fieldVal);
-    var isRequired = f.isRequired || false; // default
+    // $FlowFixMe
+    var isRequired = fieldNode.required || false;
     var fieldNotReqButEmpty = !isRequired && fieldIsEmpty; // -> isValid
 
     // if there is no errorSelector specified we automatically
     // assume that the error class should be added to the input itself
     var errTarget = getTarget(container, f.errorSelector, fieldNode);
+
     var fieldIsValid = isHidden || fieldNotReqButEmpty || validateValue(fieldVal, f.validators);
 
     toggleErrorClass(f.errorClass, fieldIsValid, errTarget);
@@ -267,6 +270,15 @@ var makeValidate = function makeValidate(config) {
   };
 };
 
+/**
+  * Initialilzes validation with the specified configuration.
+  * An onBlur EventListener with a single field validation callback will be added to each respective input field.
+  *
+  * @function makeValidationWithBlurBindings
+  * @memberof validation
+  * @param {Config} config - see validate fucntion for detailed explaination of the config object
+  * @return {Array<RemoveListeners>} removeListeners - Array of removeEventListener functions to remove the blur events if necessary
+  */
 var makeValidationWithBlurBindings = function makeValidationWithBlurBindings(_ref2) {
   var _ref2$containerSelect = _ref2.containerSelector,
       containerSelector = _ref2$containerSelect === undefined ? 'body' : _ref2$containerSelect,
@@ -278,15 +290,17 @@ var makeValidationWithBlurBindings = function makeValidationWithBlurBindings(_re
 
     if (!container) {
       console.warn(warnBaseStr + ' Container "' + containerSelector + '" could not be found!');
-      return;
+      return [];
     }
 
-    fields.forEach(function (f) {
+    var removeListeners = fields.map(function (f) {
       var fNode = container.querySelector(f.selector);
 
       if (!fNode) {
         console.warn(warnBaseStr + ' The field ' + f.selector + ' could not be found!');
-        return;
+        return function () {
+          return undefined;
+        };
       }
 
       var validateF = makeValidate({
@@ -295,7 +309,13 @@ var makeValidationWithBlurBindings = function makeValidationWithBlurBindings(_re
       });
 
       fNode.addEventListener('blur', validateF);
+
+      return function () {
+        return fNode.removeEventListener('blur', validateF);
+      };
     });
+
+    return removeListeners;
   };
 };
 

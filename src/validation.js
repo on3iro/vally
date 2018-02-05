@@ -92,9 +92,8 @@ const toggleErrorClass = (
   * @param {Config} config - Configuration object
   * @param {string} config.containerSelector - querySelector compatible string. Used
   * to get the wrapping element to look for fields. Defaults to 'body'. (optional)
-  * @param {Array<Field>} config.fields - array of field objects
-  * @param {Object} config.fields.field - a field object
-  * @param {boolean} config.fields.field.isRequired - default: false
+  * @param {Fields} config.fields - array of field objects
+  * @param {Field} config.fields.field - a field object
   * @param {string} config.fields.field.selector - querySelector compatible string. Used to get the input node. (Required)
   * @param {string} config.fields.field.errorSelector - querySelector compatible string. Used to get the element to add the errorClass to. Defaults to the input element itself. (optional)
   * @param {string} config.fields.field.errorClass - CSS class to add to the specified DOM element. Defaults to 'error'. (optional)
@@ -124,15 +123,19 @@ const validate = ({
 
     const isHidden = fieldNode.offsetParent === null
 
+    // FlowFixMes are necessary for easier mocking inside unit tests
+    // We should fix this in the future, though...
     // $FlowFixMe
     const fieldVal = fieldNode.value
     const fieldIsEmpty = isEmpty(fieldVal)
-    const isRequired = f.isRequired || false // default
+    // $FlowFixMe
+    const isRequired = fieldNode.required || false
     const fieldNotReqButEmpty = !isRequired && fieldIsEmpty // -> isValid
 
     // if there is no errorSelector specified we automatically
     // assume that the error class should be added to the input itself
     const errTarget = getTarget(container, f.errorSelector, fieldNode)
+
     const fieldIsValid = (
       isHidden ||
       fieldNotReqButEmpty ||
@@ -156,25 +159,35 @@ const validate = ({
   */
 const makeValidate = (config: Config): Function => ():boolean => validate(config)
 
+/**
+  * Initialilzes validation with the specified configuration.
+  * An onBlur EventListener with a single field validation callback will be added to each respective input field.
+  *
+  * @function makeValidationWithBlurBindings
+  * @memberof validation
+  * @public
+  * @param {Config} config - see validate fucntion for detailed explaination of the config object
+  * @return {Array<RemoveListeners>} removeListeners - Array of removeEventListener functions to remove the blur events if necessary
+  */
 const makeValidationWithBlurBindings = ({
   containerSelector = 'body',
   fields
-}: Config): Function => ():void => {
+}: Config): Function => (): Array<() => void> => {
   const warnBaseStr = 'vally, makeValidationWithBlurBindings():'
 
   const container = document.querySelector(containerSelector)
 
   if (!container) {
     console.warn(`${warnBaseStr} Container "${containerSelector}" could not be found!`)
-    return
+    return []
   }
 
-  fields.forEach(f => {
+  const removeListeners = fields.map(f => {
     const fNode = container.querySelector(f.selector)
 
     if (!fNode) {
       console.warn(`${warnBaseStr} The field ${f.selector} could not be found!`)
-      return
+      return () => undefined
     }
 
     const validateF = makeValidate({
@@ -185,7 +198,11 @@ const makeValidationWithBlurBindings = ({
     })
 
     fNode.addEventListener('blur', validateF)
+
+    return () => fNode.removeEventListener('blur', validateF)
   })
+
+  return removeListeners
 }
 
 export {

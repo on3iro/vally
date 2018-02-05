@@ -171,11 +171,13 @@ const makeValidate = (config: Config): Function => ():boolean => validate(config
   */
 const makeValidationWithBlurBindings = ({
   containerSelector = 'body',
-  fields
+  fields,
+  DOMStub
 }: Config): Function => (): Array<() => void> => {
   const warnBaseStr = 'vally, makeValidationWithBlurBindings():'
 
-  const container = document.querySelector(containerSelector)
+  const doc = DOMStub || window.document
+  const container = doc.querySelector(containerSelector)
 
   if (!container) {
     console.warn(`${warnBaseStr} Container "${containerSelector}" could not be found!`)

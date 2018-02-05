@@ -3,7 +3,8 @@
 import {
   validate,
   validateValue,
-  makeValidate
+  makeValidate,
+  makeValidationWithBlurBindings
 } from './validation'
 
 import {
@@ -15,13 +16,14 @@ import {
 } from './validators'
 
 const vally = {
-  validate,
   isEmail,
   isEmpty,
   isNoneEmptyString,
   isNumberString,
   isString,
   makeValidate,
+  makeValidationWithBlurBindings,
+  validate,
   validateValue
 }
 
@@ -33,6 +35,7 @@ export {
   isNumberString,
   isString,
   makeValidate,
+  makeValidationWithBlurBindings,
   validate,
   validateValue
 }

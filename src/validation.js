@@ -158,10 +158,43 @@ const validate = ({
   * @param {Config} config - See validate function for a detailed explanaition of the config object
   * @return {Function} - validate function
   */
-const makeValidate = (config: Config) => () => validate(config)
+const makeValidate = (config: Config): Function => ():boolean => validate(config)
+
+const makeValidationWithBlurBindings = ({
+  containerSelector = 'body',
+  fields
+}: Config): Function => ():void => {
+  const warnBaseStr = 'vally, makeValidationWithBlurBindings():'
+
+  const container = document.querySelector(containerSelector)
+
+  if (!container) {
+    console.warn(`${warnBaseStr} Container "${containerSelector}" could not be found!`)
+    return
+  }
+
+  fields.forEach(f => {
+    const fNode = container.querySelector(f.selector)
+
+    if (!fNode) {
+      console.warn(`${warnBaseStr} The field ${f.selector} could not be found!`)
+      return
+    }
+
+    const validateF = makeValidate({
+      containerSelector,
+      fields: [
+        f
+      ]
+    })
+
+    fNode.addEventListener('blur', validateF)
+  })
+}
 
 export {
   validate,
   validateValue,
-  makeValidate
+  makeValidate,
+  makeValidationWithBlurBindings
 }

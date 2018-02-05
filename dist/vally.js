@@ -271,14 +271,47 @@ var makeValidate = function makeValidate(config) {
   };
 };
 
+var makeValidationWithBlurBindings = function makeValidationWithBlurBindings(_ref2) {
+  var _ref2$containerSelect = _ref2.containerSelector,
+      containerSelector = _ref2$containerSelect === undefined ? 'body' : _ref2$containerSelect,
+      fields = _ref2.fields;
+  return function () {
+    var warnBaseStr = 'vally, makeValidationWithBlurBindings():';
+
+    var container = document.querySelector(containerSelector);
+
+    if (!container) {
+      console.warn(warnBaseStr + ' Container "' + containerSelector + '" could not be found!');
+      return;
+    }
+
+    fields.forEach(function (f) {
+      var fNode = container.querySelector(f.selector);
+
+      if (!fNode) {
+        console.warn(warnBaseStr + ' The field ' + f.selector + ' could not be found!');
+        return;
+      }
+
+      var validateF = makeValidate({
+        containerSelector: containerSelector,
+        fields: [f]
+      });
+
+      fNode.addEventListener('blur', validateF);
+    });
+  };
+};
+
 var vally = {
-  validate: validate,
   isEmail: isEmail,
   isEmpty: isEmpty,
   isNoneEmptyString: isNoneEmptyString,
   isNumberString: isNumberString,
   isString: isString,
   makeValidate: makeValidate,
+  makeValidationWithBlurBindings: makeValidationWithBlurBindings,
+  validate: validate,
   validateValue: validateValue
 };
 
@@ -289,6 +322,7 @@ exports.isNoneEmptyString = isNoneEmptyString;
 exports.isNumberString = isNumberString;
 exports.isString = isString;
 exports.makeValidate = makeValidate;
+exports.makeValidationWithBlurBindings = makeValidationWithBlurBindings;
 exports.validate = validate;
 exports.validateValue = validateValue;
 

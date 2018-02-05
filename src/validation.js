@@ -122,13 +122,7 @@ const validate = ({
       return false
     }
 
-    const isHidden = (
-      fieldNode.style.display === 'none' ||
-      fieldNode.hidden === true ||
-      (fieldNode instanceof HTMLInputElement && fieldNode.type === 'hidden')
-    )
-
-    if (isHidden) return (true && acc)
+    const isHidden = fieldNode.offsetParent === null
 
     // $FlowFixMe
     const fieldVal = fieldNode.value
@@ -139,7 +133,11 @@ const validate = ({
     // if there is no errorSelector specified we automatically
     // assume that the error class should be added to the input itself
     const errTarget = getTarget(container, f.errorSelector, fieldNode)
-    const fieldIsValid = fieldNotReqButEmpty || validateValue(fieldVal, f.validators)
+    const fieldIsValid = (
+      isHidden ||
+      fieldNotReqButEmpty ||
+      validateValue(fieldVal, f.validators)
+    )
 
     toggleErrorClass(f.errorClass, fieldIsValid, errTarget)
 

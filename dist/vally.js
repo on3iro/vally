@@ -233,9 +233,7 @@ var validate = function validate(_ref) {
       return false;
     }
 
-    var isHidden = fieldNode.style.display === 'none' || fieldNode.hidden === true || fieldNode instanceof HTMLInputElement && fieldNode.type === 'hidden';
-
-    if (isHidden) return true && acc;
+    var isHidden = fieldNode.offsetParent === null;
 
     // $FlowFixMe
     var fieldVal = fieldNode.value;
@@ -246,7 +244,7 @@ var validate = function validate(_ref) {
     // if there is no errorSelector specified we automatically
     // assume that the error class should be added to the input itself
     var errTarget = getTarget(container, f.errorSelector, fieldNode);
-    var fieldIsValid = fieldNotReqButEmpty || validateValue(fieldVal, f.validators);
+    var fieldIsValid = isHidden || fieldNotReqButEmpty || validateValue(fieldVal, f.validators);
 
     toggleErrorClass(f.errorClass, fieldIsValid, errTarget);
 

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>vally 1.1.0-beta-3 | Documentation</title>
+  <title>vally 1.1.0 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>vally</h3>
-          <div class='mb1'><code>1.1.0-beta-3</code></div>
+          <div class='mb1'><code>1.1.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -210,6 +210,31 @@
 <h1>vally</h1>
 <p><strong>vally</strong> is a simple ES6 form field validation library, that helps
 to determine if field values inside a container element pass certain tests.</p>
+<!-- vim-markdown-toc GFM -->
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li>
+<p><a href="#usage">Usage</a></p>
+<ul>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#api">API</a></p>
+<ul>
+<li><a href="#docs">Docs</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#faq">FAQ</a></p>
+<ul>
+<li><a href="#how-can-i-specify-a-field-as-_required_">How can i specify a field as <em>required</em>?</a></li>
+<li><a href="#what-happens-to-inputs-that-are-not-displayed">What happens to inputs that are not displayed?</a></li>
+<li><a href="#how-can-i-bind-vally-to-certain-events">How can I bind vally to certain events?</a></li>
+</ul>
+</li>
+</ul>
+<!-- vim-markdown-toc -->
 <h2>Installation</h2>
 <pre class='hljs'>npm i --save vally</pre>
 <p>You can either use the build from inide the <code>dist/</code> directory and include
@@ -264,6 +289,35 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
 })
 <span class="hljs-comment">// if all validation checks pass =&gt; returns true</span>
 <span class="hljs-comment">// else =&gt; returns false and an 'error' class is added to the respective &lt;input&gt;</span></pre>
+<h2>API</h2>
+<h3>Docs</h3>
+<p><a href="https://on3iro.github.io/vally"><img src="https://img.shields.io/badge/docs-API-39CCCC.svg" alt="api docs"></a></p>
+<h2>FAQ</h2>
+<h3>How can i specify a field as <em>required</em>?</h3>
+<blockquote>
+<p>Just use the regular <em><a href="https://developer.mozilla.org/de/docs/Web/HTML/Element/Input#attr-required">required</a></em>-Attribute
+on your <code>&#x3C;input></code>.</p>
+</blockquote>
+<h3>What happens to inputs that are not displayed?</h3>
+<blockquote>
+<p>Inputs that are not displayed (i.e. if <code>display: none</code>, <code>type="hidden"</code> or <code>hidden=""</code> is set), are
+simply ignored by the validation.</p>
+</blockquote>
+<h3>How can I bind vally to certain events?</h3>
+<blockquote>
+<p>There are multiple ways to use <em>vally</em>.
+Case <strong>1.</strong> and <strong>2.</strong> give you the most control over when vally is called (i.e. by binding it on the submit event).
+Case <strong>3.</strong> handles the common case of validating on blur.</p>
+<ol>
+<li>Just call the <code>validate()</code>-function somewhere inside your event listener</li>
+<li>If you want to use a validate function with the same configuration on different parts of your code
+create a pre-configured <code>validate()</code>-function by calling <code>makeValidate(config)</code>. This function can then
+be used / passed around.</li>
+<li>You can use <code>makeValidationWithBlurBindings()</code> to create a function that initiates automatic validation for every field you specified to fire
+on the <em>blur</em> event. This function also returns an array of <code>removeEventListeners</code> in case you want to get rid of
+the listeners later on.</li>
+</ol>
+</blockquote>
 
   
 </section>
@@ -281,7 +335,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/types.js#L11-L11'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/types.js#L11-L11'>
       <span>src/types.js</span>
       </a>
     
@@ -329,7 +383,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/types.js#L11-L11'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/types.js#L11-L11'>
       <span>src/types.js</span>
       </a>
     
@@ -389,7 +443,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/types.js#L17-L22'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/types.js#L17-L22'>
       <span>src/types.js</span>
       </a>
     
@@ -478,7 +532,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/types.js#L28-L28'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/types.js#L28-L28'>
       <span>src/types.js</span>
       </a>
     
@@ -538,7 +592,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/types.js#L34-L34'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/types.js#L34-L34'>
       <span>src/types.js</span>
       </a>
     
@@ -598,7 +652,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/types.js#L47-L51'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/types.js#L47-L51'>
       <span>src/types.js</span>
       </a>
     
@@ -689,7 +743,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validation.js#L7-L10'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validation.js#L7-L10'>
       <span>src/validation.js</span>
       </a>
     
@@ -737,7 +791,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validation.js#L27-L34'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validation.js#L27-L34'>
       <span>src/validation.js</span>
       </a>
     
@@ -825,7 +879,7 @@ true.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validation.js#L103-L151'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validation.js#L103-L151'>
       <span>src/validation.js</span>
       </a>
     
@@ -988,7 +1042,7 @@ to get the wrapping element to look for fields. Defaults to 'body'. (optional)
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validation.js#L160-L160'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validation.js#L160-L160'>
       <span>src/validation.js</span>
       </a>
     
@@ -1065,18 +1119,18 @@ to get the wrapping element to look for fields. Defaults to 'body'. (optional)
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validation.js#L172-L206'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validation.js#L172-L208'>
       <span>src/validation.js</span>
       </a>
     
   </div>
   
 
-  <p>Initialilzes validation with the specified configuration.
+  <p>Returns a function that initialilzes validation with the specified configuration.
 An onBlur EventListener with a single field validation callback will be added to each respective input field.</p>
 
 
-  <div class='pre p1 fill-light mt0'>makeValidationWithBlurBindings(config: Config): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;RemoveListeners></div>
+  <div class='pre p1 fill-light mt0'>makeValidationWithBlurBindings(config: Config)</div>
   
   
 
@@ -1105,14 +1159,6 @@ An onBlur EventListener with a single field validation callback will be added to
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;RemoveListeners></code>:
-        removeListeners - Array of removeEventListener functions to remove the blur events if necessary
-
-      
-    
   
 
   
@@ -1151,7 +1197,7 @@ An onBlur EventListener with a single field validation callback will be added to
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validators.js#L7-L7'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validators.js#L7-L7'>
       <span>src/validators.js</span>
       </a>
     
@@ -1199,7 +1245,7 @@ An onBlur EventListener with a single field validation callback will be added to
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validators.js#L61-L61'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validators.js#L61-L61'>
       <span>src/validators.js</span>
       </a>
     
@@ -1275,7 +1321,7 @@ An onBlur EventListener with a single field validation callback will be added to
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validators.js#L81-L81'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validators.js#L81-L81'>
       <span>src/validators.js</span>
       </a>
     
@@ -1350,7 +1396,7 @@ An onBlur EventListener with a single field validation callback will be added to
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validators.js#L89-L89'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validators.js#L89-L89'>
       <span>src/validators.js</span>
       </a>
     
@@ -1425,7 +1471,7 @@ An onBlur EventListener with a single field validation callback will be added to
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validators.js#L97-L101'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validators.js#L97-L101'>
       <span>src/validators.js</span>
       </a>
     
@@ -1500,7 +1546,7 @@ An onBlur EventListener with a single field validation callback will be added to
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/7fbb6a4b2501ff6148618a8dd23db08327f1fb26/src/validators.js#L109-L113'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/3a826c1eb9c1c42efcbeffcebdad51d26d43a414/src/validators.js#L109-L113'>
       <span>src/validators.js</span>
       </a>
     

@@ -160,22 +160,24 @@ const validate = ({
 const makeValidate = (config: Config): Function => ():boolean => validate(config)
 
 /**
-  * Initialilzes validation with the specified configuration.
+  * Returns a function that initialilzes validation with the specified configuration.
   * An onBlur EventListener with a single field validation callback will be added to each respective input field.
   *
   * @function makeValidationWithBlurBindings
   * @memberof validation
   * @public
   * @param {Config} config - see validate fucntion for detailed explaination of the config object
-  * @return {Array<RemoveListeners>} removeListeners - Array of removeEventListener functions to remove the blur events if necessary
+  * @return {() =>  Array<RemoveListeners>} removeListeners - Array of removeEventListener functions to remove the blur events if necessary
   */
 const makeValidationWithBlurBindings = ({
   containerSelector = 'body',
-  fields
+  fields,
+  DOMStub
 }: Config): Function => (): Array<() => void> => {
   const warnBaseStr = 'vally, makeValidationWithBlurBindings():'
 
-  const container = document.querySelector(containerSelector)
+  const doc = DOMStub || window.document
+  const container = doc.querySelector(containerSelector)
 
   if (!container) {
     console.warn(`${warnBaseStr} Container "${containerSelector}" could not be found!`)

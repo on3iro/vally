@@ -105,8 +105,9 @@ const isValid = validate({
 
 ### Docs
 
-[![api docs](https://img.shields.io/badge/docs-API-39CCCC.svg)](https://on3iro.github.io/vally)
+Configuration and API details can be found here:
 
+[![api docs](https://img.shields.io/badge/docs-API-39CCCC.svg)](https://on3iro.github.io/vally)
 
 ## FAQ
 
@@ -126,9 +127,9 @@ const isValid = validate({
 > Case **1.** and **2.** give you the most control over when vally is called (i.e. by binding it on the submit event).
 > Case **3.** handles the common case of validating on blur.
 >
-> 1. Just call the `validate()`-function somewhere inside your event listener
-> 2. If you want to use a validate function with the same configuration on different parts of your code
->    create a pre-configured `validate()`-function by calling `makeValidate(config)`. This function can then
->    be used / passed around.
-> 3. You can use `makeValidationWithBlurBindings()` to create a function which initializes automatic validation for every field you specified to fire on the _blur_ event. This function also returns an array of `removeEventListeners` in case you want to get rid of
->    the listeners later on.
+> 1.  Just call the `validate()`-function somewhere inside your event listener
+> 2.  If you want to use a validate function with the same configuration on different parts of your code
+>     create a pre-configured `validate()`-function by calling `makeValidate(config)`. This function can then
+>     be used / passed around.
+> 3.  You can use `makeValidationWithBlurBindings()` to create a function which initializes automatic validation for every field you specified to fire on the _blur_ event. This function also returns an array of `removeEventListeners` in case you want to get rid of
+>     the listeners later on.

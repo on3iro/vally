@@ -1,9 +1,5 @@
 // @flow
 
-/**
-  * @namespace validate
-  */
-
 import validateValue from './validateValue'
 
 import type {
@@ -20,7 +16,6 @@ import {
  * node will be returned
  *
   * @function getTarget
-  * @memberof validate
   * @private
   * @param {HTMLElement} container - Container to search in
   * @param {string} selector - querySelector compatible string
@@ -45,7 +40,6 @@ const getTarget = (
  * Adds or removes a specified CSS class from a target element if the condition is true/false
  *
   * @function toggleErrorClass
-  * @memberof validate
   * @private
   * @param {string} errCls - class to toggle. Default: 'error'
   * @param {boolean} isValid - condition which determines if class should be added or removed
@@ -69,16 +63,7 @@ const toggleErrorClass = (
  * Hidden fields are ignored.
  *
   * @function validate
-  * @memberof validate
   * @param {Config} config - Configuration object
-  * @param {string} config.containerSelector - querySelector compatible string. Used
-  * to get the wrapping element to look for fields. Defaults to 'body'. (optional)
-  * @param {Fields} config.fields - array of field objects
-  * @param {Field} config.fields.field - a field object
-  * @param {string} config.fields.field.selector - querySelector compatible string. Used to get the input node. (Required)
-  * @param {string} config.fields.field.errorSelector - querySelector compatible string. Used to get the element to add the errorClass to. Defaults to the input element itself. (optional)
-  * @param {string} config.fields.field.errorClass - CSS class to add to the specified DOM element. Defaults to 'error'. (optional)
-  * @param {Array<Validators>} config.fields.field.validators - Array of validator functions. Each function should take a single value as input and return a boolean. (Required)
   * @return {boolean}
   */
 const validate = ({

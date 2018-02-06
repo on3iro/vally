@@ -4,6 +4,7 @@ import validate from './validate'
 import validateValue from './validateValue'
 import makeValidate from './makeValidate'
 import makeValidationWithBlurBindings from './makeValidationWithBlurBindings'
+import makeValidationWithBindings from './makeValidationWithBindings'
 
 import {
   isEmail,
@@ -24,5 +25,6 @@ export {
   validateValue,
   makeValidate,
   validate,
-  makeValidationWithBlurBindings
+  makeValidationWithBlurBindings,
+  makeValidationWithBindings
 }

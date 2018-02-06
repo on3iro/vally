@@ -131,5 +131,5 @@ Configuration and API details can be found here:
 > 2.  If you want to use a validate function with the same configuration on different parts of your code
 >     create a pre-configured `validate()`-function by calling `makeValidate(config)`. This function can then
 >     be used / passed around.
-> 3.  You can use `makeValidationWithBlurBindings()` to create a function which initializes automatic validation for every field you specified to fire on the _blur_ event. This function also returns an array of `removeEventListeners` in case you want to get rid of
+> 3.  You can use `makeValidationWithBindings()` to create a function which initializes automatic validation for every field you specified to fire on a DOM-event. This function also returns an array of `removeEventListeners` in case you want to get rid of
 >     the listeners later on.

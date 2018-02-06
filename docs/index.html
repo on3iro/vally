@@ -35,9 +35,9 @@
               
                 
                 <li><a
-                  href='#helpers'
-                  class="">
-                  helpers
+                  href='#configuration'
+                  class="h5 bold black caps">
+                  Configuration
                   
                 </a>
                 
@@ -58,6 +58,16 @@
                   href='#makevalidationwithblurbindings'
                   class="">
                   makeValidationWithBlurBindings
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#makevalidationwithbindings'
+                  class="">
+                  makeValidationWithBindings
                   
                 </a>
                 
@@ -118,28 +128,10 @@
                 
                 <li><a
                   href='#validate'
-                  class=" toggle-sibling">
+                  class="">
                   validate
-                  <span class='icon'>▸</span>
+                  
                 </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  <ul class='list-reset py1-ul pl1'>
-                    <li class='h5'><span>Static members</span></li>
-                    
-                      <li><a
-                        href='#validatevalidate'
-                        class='regular pre-open'>
-                        .validate
-                      </a></li>
-                    
-                    </ul>
-                  
-                  
-                  
-                  
-                </div>
                 
                 </li>
               
@@ -313,6 +305,7 @@ insertion of custom HTML-templates for advanced use cases in the future)</em></p
 <span class="hljs-comment">// else =&gt; returns false and an 'error' class is added to the respective &lt;input&gt;</span></pre>
 <h2>API</h2>
 <h3>Docs</h3>
+<p>Configuration and API details can be found here:</p>
 <p><a href="https://on3iro.github.io/vally"><img src="https://img.shields.io/badge/docs-API-39CCCC.svg" alt="api docs"></a></p>
 <h2>FAQ</h2>
 <h3>How can i specify a field as <em>required</em>?</h3>
@@ -346,53 +339,108 @@ the listeners later on.</li>
           
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+
+  <h2 id='configuration' class='mt0'>
+    Configuration
+  </h2>
 
   
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='helpers'>
-      helpers
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/helpers.js#L18-L27'>
-      <span>src/helpers.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>helpers</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
+    <h3>Config</h3>
+<table>
+<thead>
+<tr>
+<th align="left">property</th>
+<th>type</th>
+<th align="center">default</th>
+<th align="center">required</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">containerSelector</td>
+<td>string</td>
+<td align="center"><code>'body'</code></td>
+<td align="center">-</td>
+<td align="left"><code>querySelector</code>
+ compatible string. Used to get the wrapping element to look for fields.</td>
+</tr>
+<tr>
+<td align="left">fields</td>
+<td>Array
+<Field></td>
+<td align="center"><code>[]</code></td>
+<td align="center">yes</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">DOMStub :warning:</td>
+<td>Object</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="left">This is a dev-only feature used for unit-tests - do not use this in production!</td>
+</tr>
+</tbody>
+</table>
+<h3>Field</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>type</th>
+<th align="center">default</th>
+<th align="center">required</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>selector</td>
+<td>string</td>
+<td align="center">-</td>
+<td align="center">yes</td>
+<td><code>querySelector</code>
+ compatible string. Used to get the input node.</td>
+</tr>
+<tr>
+<td>errorSelector</td>
+<td>string</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td><code>querySelector</code>
+ compatible string. Used to get the element to add the 
+<code>errorClass</code>
+ to. If no class is specified the 
+<code>&#x3C;input></code>
+ field it self will be targeted</td>
+</tr>
+<tr>
+<td>errorClass</td>
+<td>string</td>
+<td align="center"><code>'error'</code></td>
+<td align="center">-</td>
+<td>CSS class to add to the specified DOM element.</td>
+</tr>
+<tr>
+<td>validators</td>
+<td>Array
+<Validator></td>
+<td align="center">-</td>
+<td align="center">yes</td>
+<td>Array of Validator functions</td>
+</tr>
+</tbody>
+</table>
+<h3>Validators</h3>
+<p>Whenever <em>vally</em> is run each input value will consequtively be applied to each of its validator functions.
+A validation function should always look like this:</p>
+<pre class='hljs'>type Validator = <span class="hljs-function">(<span class="hljs-params">any</span>) =&gt;</span> boolean</pre>
+<p>Predefined validators can be found inside the API-documentation.</p>
 
   
 </section>
-
+</div>
           
         
           
@@ -406,7 +454,7 @@ the listeners later on.</li>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/makeValidate.js#L14-L23'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/makeValidate.js#L14-L23'>
       <span>src/makeValidate.js</span>
       </a>
     
@@ -434,8 +482,7 @@ the listeners later on.</li>
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>config</span> <code class='quiet'>(Config)</code>
-	    See validate function for a detailed explanaition of the config object
-
+	    
           </div>
           
         </div>
@@ -488,7 +535,7 @@ the listeners later on.</li>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/makeValidationWithBlurBindings.js#L20-L36'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/makeValidationWithBlurBindings.js#L21-L37'>
       <span>src/makeValidationWithBlurBindings.js</span>
       </a>
     
@@ -504,7 +551,7 @@ Optionally you can add a callback function, that will be invoked after each vali
   
   
 
-  <div>Deprecated: This is deprecated.
+  <div>Deprecated: This function has been deprecated with v1.3.0. Use makeValidationWithBindings instead.
 </div>
   
   
@@ -519,8 +566,7 @@ Optionally you can add a callback function, that will be invoked after each vali
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>config</span> <code class='quiet'>(Config)</code>
-	    see validate function for detailed explaination of the config object
-
+	    
           </div>
           
         </div>
@@ -571,12 +617,120 @@ this function will receive and object { config: Config, isValid: boolean } as fi
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='makevalidationwithbindings'>
+      makeValidationWithBindings
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/makeValidationWithBindings.js#L23-L63'>
+      <span>src/makeValidationWithBindings.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns a function that initializes validation with the specified configuration.
+When the returned function is called, an eventListener will be added for each
+configured input field. This will in turn return an array of removeListener functions
+you can invoke to get rid of the listeners later on.
+Optionally you can add a callback function, that will be invoked after each validation.</p>
+
+
+  <div class='pre p1 fill-light mt0'>makeValidationWithBindings(config: Config, event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?, debounceTime: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>config</span> <code class='quiet'>(Config)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>event</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>blur</code>)</code>
+	    event to bind on
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?)</code>
+	    function that gets invoked whenever a field fails validation.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>debounceTime</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>0</code>)</code>
+	    time to debounce events before the validation is called
+this function will receive and object { config: Config, isValid: boolean } as first argument.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>:
+        () => Array
+<Function>
+ - returns an initializer Function, which returns an array of removeEventListener functions
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='types'>
       types
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/types.js#L11-L11'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/types.js#L11-L11'>
       <span>src/types.js</span>
       </a>
     
@@ -624,7 +778,7 @@ this function will receive and object { config: Config, isValid: boolean } as fi
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/types.js#L11-L11'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/types.js#L11-L11'>
       <span>src/types.js</span>
       </a>
     
@@ -684,7 +838,7 @@ this function will receive and object { config: Config, isValid: boolean } as fi
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/types.js#L17-L22'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/types.js#L17-L22'>
       <span>src/types.js</span>
       </a>
     
@@ -773,7 +927,7 @@ this function will receive and object { config: Config, isValid: boolean } as fi
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/types.js#L28-L28'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/types.js#L28-L28'>
       <span>src/types.js</span>
       </a>
     
@@ -833,7 +987,7 @@ this function will receive and object { config: Config, isValid: boolean } as fi
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/types.js#L34-L34'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/types.js#L34-L34'>
       <span>src/types.js</span>
       </a>
     
@@ -893,7 +1047,7 @@ this function will receive and object { config: Config, isValid: boolean } as fi
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/types.js#L47-L51'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/types.js#L47-L51'>
       <span>src/types.js</span>
       </a>
     
@@ -984,55 +1138,7 @@ this function will receive and object { config: Config, isValid: boolean } as fi
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validate.js#L7-L7'>
-      <span>src/validate.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>validate</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Static Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='validatevalidate'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>validate(config)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validate.js#L84-L132'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/validate.js#L69-L117'>
       <span>src/validate.js</span>
       </a>
     
@@ -1066,90 +1172,6 @@ Hidden fields are ignored.</p>
 
           </div>
           
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>config.containerSelector</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  </td>
-  <td class='break-word'><span>querySelector compatible string. Used
-to get the wrapping element to look for fields. Defaults to 'body'. (optional)
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>config.fields</span> <code class='quiet'>Fields</code>
-  </td>
-  <td class='break-word'><span>array of field objects
-</span></td>
-</tr>
-
-  
-    <tr>
-  <td class='break-word'><span class='code bold'>config.fields.field</span> <code class='quiet'>Field</code>
-  </td>
-  <td class='break-word'><span>a field object
-</span></td>
-</tr>
-
-  
-    <tr>
-  <td class='break-word'><span class='code bold'>config.fields.field.selector</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  </td>
-  <td class='break-word'><span>querySelector compatible string. Used to get the input node. (Required)
-</span></td>
-</tr>
-
-
-  
-    <tr>
-  <td class='break-word'><span class='code bold'>config.fields.field.errorSelector</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  </td>
-  <td class='break-word'><span>querySelector compatible string. Used to get the element to add the errorClass to. Defaults to the input element itself. (optional)
-</span></td>
-</tr>
-
-
-  
-    <tr>
-  <td class='break-word'><span class='code bold'>config.fields.field.errorClass</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  </td>
-  <td class='break-word'><span>CSS class to add to the specified DOM element. Defaults to 'error'. (optional)
-</span></td>
-</tr>
-
-
-  
-    <tr>
-  <td class='break-word'><span class='code bold'>config.fields.field.validators</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Validators></code>
-  </td>
-  <td class='break-word'><span>Array of validator functions. Each function should take a single value as input and return a boolean. (Required)
-</span></td>
-</tr>
-
-
-  
-
-
-  
-
-
-              
-            </tbody>
-          </table>
-          
         </div>
       
     </div>
@@ -1178,18 +1200,6 @@ to get the wrapping element to look for fields. Defaults to 'body'. (optional)
   
 </section>
 
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-
-  
-</section>
-
           
         
           
@@ -1203,7 +1213,7 @@ to get the wrapping element to look for fields. Defaults to 'body'. (optional)
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validateValue.js#L17-L24'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/validateValue.js#L17-L24'>
       <span>src/validateValue.js</span>
       </a>
     
@@ -1287,7 +1297,7 @@ true.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validators.js#L7-L7'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/validators.js#L7-L7'>
       <span>src/validators.js</span>
       </a>
     
@@ -1335,7 +1345,7 @@ true.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validators.js#L61-L61'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/validators.js#L61-L61'>
       <span>src/validators.js</span>
       </a>
     
@@ -1411,7 +1421,7 @@ true.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validators.js#L81-L81'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/validators.js#L81-L81'>
       <span>src/validators.js</span>
       </a>
     
@@ -1486,7 +1496,7 @@ true.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validators.js#L89-L89'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/validators.js#L89-L89'>
       <span>src/validators.js</span>
       </a>
     
@@ -1561,7 +1571,7 @@ true.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validators.js#L97-L101'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/validators.js#L97-L101'>
       <span>src/validators.js</span>
       </a>
     
@@ -1636,7 +1646,7 @@ true.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d4c36c1dab69d6e003a416f52983cdac19a03cde/src/validators.js#L109-L113'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/d17f42f3e1bc0fe38e9aeb2fa146bd01d80e24a2/src/validators.js#L109-L113'>
       <span>src/validators.js</span>
       </a>
     

@@ -9,10 +9,10 @@ import type { Config } from './types'
   * Optionally you can add a callback function, that will be invoked after each validation.
   *
   * @function makeValidationWithBlurBindings
-  * @deprecated
+  * @deprecated - This function has been deprecated with v1.3.0. Use makeValidationWithBindings instead.
   * @memberof validation
   * @public
-  * @param {Config} config - see validate function for detailed explaination of the config object
+  * @param {Config} config
   * @param {Function} [callback] - function that gets invoked whenever a field fails validation.
   *   this function will receive and object { config: Config, isValid: boolean } as first argument.
   * @return {Function} () => Array<Function> - returns an initializer Function, which returns an array of removeEventListener functions

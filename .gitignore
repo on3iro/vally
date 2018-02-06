@@ -176,12 +176,10 @@ jspm_packages
 # Project
 # ======================================================================================================================
 src/js/main.bundle.*
-src/css
 
 /es
 /lib
 
-*/**/sprite.svg
-*/**/_svg-sprite.scss
+/dist
 
 .tern-port

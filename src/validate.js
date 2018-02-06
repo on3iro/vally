@@ -66,7 +66,7 @@ const toggleErrorClass = (
 /**
  * Collects all specified fields from inside a container element and applies each field to a set of validator functions. If validation fails on any field the function returns false. Otherwise it returns true.
  * If a field contains any validation error a specified error class is added to the specified element. If it does not contain errors the class is removed again.
- * Hidden (display: "none") fields are ignored.
+ * Hidden fields are ignored.
  *
   * @function validate
   * @memberof validate

@@ -26,7 +26,7 @@ const nodeFactory = (): {
   }
 }
 
-const makeSetUp = (callbackFn: Function) => (configOW: Object, errCallback: ?Function) => {
+const makeSetUp = (callbackFn: Function) => (configOW: Object, ...args: Array<mixed>) => {
   const document = nodeFactory()
   const body = {
     ...nodeFactory(),
@@ -69,7 +69,7 @@ const makeSetUp = (callbackFn: Function) => (configOW: Object, errCallback: ?Fun
   }
 
     // $FlowFixMe
-  const result = callbackFn(config, errCallback)
+  const result = callbackFn(config, ...args)
 
   return {
     DOMStub,

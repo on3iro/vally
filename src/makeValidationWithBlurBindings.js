@@ -3,6 +3,8 @@
 import makeValidationWithBindings from './makeValidationWithBindings.js'
 import type { Config } from './types'
 
+type RemoveListeners = Array<() => void>
+
 /**
   * Returns a function that initialilzes validation with the specified configuration.
   * An onBlur EventListener with a single field validation callback will be added to each respective input field.
@@ -23,16 +25,20 @@ const makeValidationWithBlurBindings = ({
   DOMStub
 }: Config,
   callbackFn: ?({ config: Config, isValid: boolean }) => any
-): Function => (): Array<() => void> => {
-  return makeValidationWithBindings(
-    {
-      containerSelector,
-      fields,
-      DOMStub
-    },
-    'blur',
-    callbackFn
-  )()
+): Function => {
+  console.warn('vally, makeValidationWithBlurBindings: This function has been deprecated with v1.3.0. Use makeValidationWithBindings instead!')
+
+  return (): RemoveListeners => {
+    return makeValidationWithBindings(
+      {
+        containerSelector,
+        fields,
+        DOMStub
+      },
+      'blur',
+      callbackFn
+    )()
+  }
 }
 
 export default makeValidationWithBlurBindings

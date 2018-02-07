@@ -52,7 +52,10 @@ const makeValidationWithBindings = ({
       fields: [ f ]
     }, callbackFn)
 
-    const debouncedFn = debounce(validateFn, debounceTime)
+    // It is important that we curry the validateFn here.
+    // Otherwise the event Object of the eventlistener
+    // could potentially overwrite any args.
+    const debouncedFn = debounce(() => validateFn(), debounceTime)
 
     fNode.addEventListener(event, debouncedFn)
 

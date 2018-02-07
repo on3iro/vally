@@ -9,7 +9,7 @@ import type { Config } from './types'
   * @memberof validation
   * @param {Config} config
   * @param {Function} [callbackFn] - function that is invoked after each call to the validation and receives an object { config: Config, isValid: boolean } as its first argument
-  * @return {Function} - validate function
+  * @return {Function} - preconfigured validate function: (resultOnly = false) => validate()
   */
 const makeValidate = <T: Config>(
   config: T,

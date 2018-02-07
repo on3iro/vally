@@ -14,8 +14,8 @@ import type { Config } from './types'
 const makeValidate = <T: Config>(
   config: T,
   callbackFn: ?({ config: T, isValid: boolean }) => any
-): Function => ():boolean => {
-  const isValid = validate(config)
+): Function => (resultOnly: boolean = false):boolean => {
+  const isValid = validate(config, resultOnly)
 
   if (callbackFn) callbackFn({ config, isValid })
 

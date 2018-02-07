@@ -12,16 +12,35 @@ describe('makeValidate()', () => {
 
   it('should return pre-configured validate function', () => {
     // result is the validationFn
-    const { result } = setUp({
+    const { result, DOMStub } = setUp({
       fields: [
         {
-          selector: '.input_num-string',
+          selector: '.input_string',
           validators: [ isNumberString ]
         }
       ]
     })
 
-    expect(result()).toBe(true)
+    expect(result()).toBe(false)
+
+    const fieldNode = DOMStub.body['.input_string']
+    expect(fieldNode.classList.add).toHaveBeenCalledWith('error')
+  })
+
+  it('should return function with optional resultOnly parameter', () => {
+    const { result, DOMStub } = setUp({
+      fields: [
+        {
+          selector: '.input_string',
+          validators: [ isNumberString ]
+        }
+      ]
+    })
+
+    expect(result(true)).toBe(false)
+
+    const fieldNode = DOMStub.body['.input_string']
+    expect(fieldNode.classList.add).not.toHaveBeenCalledWith('error')
   })
 }) // end makeValidate()
 

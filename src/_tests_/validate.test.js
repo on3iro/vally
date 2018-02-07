@@ -164,4 +164,20 @@ describe('validate()', () => {
 
     expect(result).toBe(true)
   })
+
+  it('should omit DOM-maniulation if resultOnly flag is set', () => {
+    const { result, DOMStub } = setUp({
+      fields: [
+        {
+          selector: '.input_string',
+          validators: [ isNumberString ]
+        }
+      ]
+    }, true)
+
+    expect(result).toBe(false)
+
+    const fieldNode = DOMStub.body['.input_string']
+    expect(fieldNode.classList.add).not.toHaveBeenCalledWith('error')
+  })
 }) // end validate()

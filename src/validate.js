@@ -64,13 +64,16 @@ const toggleErrorClass = (
  *
   * @function validate
   * @param {Config} config - Configuration object
+  * @param {boolean} [resultOnly=false] - If set to true no DOM-manipulation will occur and only the result will be returned
   * @return {boolean}
   */
 const validate = ({
   containerSelector = 'body',
   fields,
   DOMStub
-}:Config) => {
+}:Config,
+  resultOnly: boolean = false
+) => {
   const doc = DOMStub || window.document
   const container = doc.querySelector(containerSelector)
 
@@ -98,17 +101,19 @@ const validate = ({
     const isRequired = fieldNode.required || false
     const fieldNotReqButEmpty = !isRequired && fieldIsEmpty // -> isValid
 
-    // if there is no errorSelector specified we automatically
-    // assume that the error class should be added to the input itself
-    const errTarget = getTarget(container, f.errorSelector, fieldNode)
-
     const fieldIsValid = (
       isHidden ||
       fieldNotReqButEmpty ||
       validateValue(fieldVal, f.validators)
     )
 
-    toggleErrorClass(f.errorClass, fieldIsValid, errTarget)
+    if (!resultOnly) {
+      // if there is no errorSelector specified we automatically
+      // assume that the error class should be added to the input itself
+      const errTarget = getTarget(container, f.errorSelector, fieldNode)
+
+      toggleErrorClass(f.errorClass, fieldIsValid, errTarget)
+    }
 
     return fieldIsValid && acc
   }, true)

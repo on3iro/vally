@@ -5,7 +5,7 @@ import {
   isString,
   isNumberString,
   isNoneEmptyString
-} from '../validators'
+} from '../validatorFns'
 
 describe('isEmail()', () => {
   it('should return true for "test@test.de"', () => {

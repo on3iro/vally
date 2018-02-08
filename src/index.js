@@ -1,10 +1,8 @@
 // @flow
 
 import validate from './validate'
-import validateValue from './validateValue'
-import makeValidate from './makeValidate'
-import makeValidationWithBlurBindings from './makeValidationWithBlurBindings'
-import makeValidationWithBindings from './makeValidationWithBindings'
+import validateNode from './validateNode'
+import initWithBindings from './initWithBindings'
 
 import {
   isEmail,
@@ -12,7 +10,7 @@ import {
   isNoneEmptyString,
   isNumberString,
   isString
-} from './validators'
+} from './validatorFns'
 
 export {
   // validators
@@ -22,9 +20,7 @@ export {
   isNumberString,
   isString,
   // validation
-  validateValue,
-  makeValidate,
+  validateNode,
   validate,
-  makeValidationWithBlurBindings,
-  makeValidationWithBindings
+  initWithBindings
 }

@@ -4,7 +4,7 @@
   * @namespace validators
   */
 
-import type { Validator } from './types'
+import type { ValidatorFn } from './types'
 
 // private validators //
 
@@ -31,7 +31,7 @@ const testRegex = (val:string, re:RegExp) => {
   * @param {string} val
   * @return {boolean}
   */
-export const isUndefined: Validator = (val:any):boolean => val === undefined
+export const isUndefined: ValidatorFn = (val:any):boolean => val === undefined
 
 /**
   * @function isNull
@@ -40,7 +40,7 @@ export const isUndefined: Validator = (val:any):boolean => val === undefined
   * @param {string} val
   * @return {boolean}
   */
-export const isNull:Validator = (val:any):boolean => val === null
+export const isNull:ValidatorFn = (val:any):boolean => val === null
 
 /**
   * @function isNil
@@ -49,7 +49,7 @@ export const isNull:Validator = (val:any):boolean => val === null
   * @param {string} val
   * @return {boolean}
   */
-export const isNil:Validator = (val:any):boolean => isUndefined(val) && isNull(val)
+export const isNil:ValidatorFn = (val:any):boolean => isUndefined(val) && isNull(val)
 
 /**
   * @function isNumber
@@ -58,7 +58,7 @@ export const isNil:Validator = (val:any):boolean => isUndefined(val) && isNull(v
   * @param {string} val
   * @return {boolean}
   */
-export const isNumber:Validator = (val:any):boolean => typeof val === 'number'
+export const isNumber:ValidatorFn = (val:any):boolean => typeof val === 'number'
 
 // public validators //
 
@@ -70,7 +70,7 @@ export const isNumber:Validator = (val:any):boolean => typeof val === 'number'
   * @param {string} val
   * @return {boolean}
   */
-export const isEmpty:Validator = (val:any):boolean => isUndefined(val) || val.length === 0
+export const isEmpty:ValidatorFn = (val:any):boolean => isUndefined(val) || val.length === 0
 
 /**
   * @function isString
@@ -78,7 +78,7 @@ export const isEmpty:Validator = (val:any):boolean => isUndefined(val) || val.le
   * @param {string} val
   * @return {boolean}
   */
-export const isString:Validator = (val:any):boolean => typeof val === 'string'
+export const isString:ValidatorFn = (val:any):boolean => typeof val === 'string'
 
 /**
   * @function isNoneEmptyString
@@ -86,7 +86,7 @@ export const isString:Validator = (val:any):boolean => typeof val === 'string'
   * @param {string} val
   * @return {boolean}
   */
-export const isNoneEmptyString:Validator = (val:any):boolean => isString(val) && val.length > 0
+export const isNoneEmptyString:ValidatorFn = (val:any):boolean => isString(val) && val.length > 0
 
 /**
   * @function isNumberString
@@ -94,7 +94,7 @@ export const isNoneEmptyString:Validator = (val:any):boolean => isString(val) &&
   * @param {string} val
   * @return {boolean}
   */
-export const isNumberString:Validator = (val:any):boolean => {
+export const isNumberString:ValidatorFn = (val:any):boolean => {
   const re = /^\d+$/
 
   return testRegex(val, re)
@@ -106,7 +106,7 @@ export const isNumberString:Validator = (val:any):boolean => {
   * @param {string} val
   * @return {boolean}
   */
-export const isEmail:Validator = (val:any):boolean => {
+export const isEmail:ValidatorFn = (val:any):boolean => {
   const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
   return testRegex(val, re)

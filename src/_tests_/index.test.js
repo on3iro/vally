@@ -6,10 +6,8 @@ import {
   isNumberString,
   isString,
   // validation
-  validateValue,
-  makeValidate,
-  validate,
-  makeValidationWithBlurBindings
+  validateNode,
+  validate
 } from '../index'
 
 describe('index', () => {
@@ -33,19 +31,11 @@ describe('index', () => {
     expect(typeof isString).toBe('function')
   })
 
-  it('should export validateValue', () => {
-    expect(typeof validateValue).toBe('function')
-  })
-
-  it('should export makeValidate', () => {
-    expect(typeof makeValidate).toBe('function')
+  it('should export validateNode', () => {
+    expect(typeof validateNode).toBe('function')
   })
 
   it('should export validate', () => {
     expect(typeof validate).toBe('function')
-  })
-
-  it('should export makeValidationWithBlurBindings', () => {
-    expect(typeof makeValidationWithBlurBindings).toBe('function')
   })
 })

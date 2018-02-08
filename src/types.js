@@ -4,20 +4,23 @@
   * @namespace types
   */
 
+export type ValidatorFn = (val:any) => boolean
+
 /**
   * Validator
   * @memberof types
   */
-export type Validator = (val:any) => boolean
+export type Validator = {
+  fn: ValidatorFn,
+  type?: string
+}
 
 /**
-  * Field
+  * Definition
   * @memberof types
   */
-export type Field = {|
-  selector: string,
-  errorSelector?: string,
-  errorClass?: string,
+export type Definition = {|
+  node: HTMLInputElement,
   validators: Array<Validator>
 |}
 
@@ -25,27 +28,23 @@ export type Field = {|
   * Fields
   * @memberof types
   */
-export type Fields = Array<Field>
+export type Fields = Array<Definition>
 
-/**
-  * ContainerSelector
-  * @memberof types
-  */
-export type ContainerSelector = string
+export type Validation = {|
+  isValid: boolean,
+  node: HTMLInputElement,
+  validator: ?Validator
+|}
 
-/**
-  * Stub
-  * @memberof types
-  * @private
-  */
-type Stub = Document | Object
+export type Result = {|
+  isValid: boolean,
+  validations: Array<Validation>
+|}
 
 /**
   * Config
   * @memberof types
   */
 export type Config = {|
-  containerSelector?: ContainerSelector,
-  fields: Fields,
-  DOMStub?: Stub
+  fields: Fields
 |}

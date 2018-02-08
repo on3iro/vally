@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Simple submit</title>
+    <style>
+      input {
+        outline: none;
+        box-shadow: none;
+      }
+
+      .error {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="myform" action="" method="">
+      <label for="number">Some number:</label>
+      <input id="number" type="text" name="number">
+
+      <br>
+      <br>
+
+      <label for="mail">Mail*:</label>
+      <input id="mail" type="text" name="email" required>
+
+      <br>
+      <br>
+
+      <label for="custom">Custom (start with 'T')*:</label>
+      <input id="custom" type="text" name="custom">
+
+      <br>
+      <br>
+
+      <button id="submit" type="submit">Submit</button>
+    </form>
+
+    <script src="../../dist/vally.min.js"></script>
+
+<script>
+
+const mail = document.getElementById('mail')
+const number = document.getElementById('number')
+const submit = document.getElementById('submit')
+const custom = document.getElementById('custom')
+
+if (mail && number && submit && custom) {
+  submit.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    const startsWithT = (val) => val.charAt(0) === 'T'
+
+    const result = vally.validate({
+      fields: [
+        {
+          node: mail,
+          validators: [ { fn: vally.isEmail } ]
+        },
+        {
+          node: number,
+          validators: [ { fn: vally.isNumberString } ]
+        },
+        {
+          node: custom,
+          validators: [ { fn: startsWithT }]
+        }
+      ]
+    })
+
+    result.validations.map(v => {
+      if (!v.isValid) {
+        v.node.classList.add('error')
+      } else {
+        v.node.classList.remove('error')
+      }
+    })
+  })
+}
+
+</script>
+  </body>
+</html>

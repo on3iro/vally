@@ -180,6 +180,4 @@ src/js/main.bundle.*
 /es
 /lib
 
-/dist
-
 .tern-port

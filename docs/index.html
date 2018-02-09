@@ -1,164 +1,55 @@
 <!doctype html>
-<html>
-<head>
-  <meta charset='utf-8' />
-  <title>vally 2.0.0-beta-2 | Documentation</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
-  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
-  <link href='assets/style.css' type='text/css' rel='stylesheet' />
-  <link href='assets/github.css' type='text/css' rel='stylesheet' />
-  <link href='assets/split.css' type='text/css' rel='stylesheet' />
-</head>
-<body class='documentation m0'>
-    <div class='flex'>
-      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
-        <div class='py1 px2'>
-          <h3 class='mb0 no-anchor'>vally</h3>
-          <div class='mb1'><code>2.0.0-beta-2</code></div>
-          <input
-            placeholder='Filter'
-            id='filter-input'
-            class='col12 block input'
-            type='text' />
-          <div id='toc'>
-            <ul class='list-reset h5 py1-ul'>
-              
-                
-                <li><a
-                  href='#readme'
-                  class="h5 bold black caps">
-                  README
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#configuration'
-                  class="h5 bold black caps">
-                  Configuration
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#types'
-                  class=" toggle-sibling">
-                  types
-                  <span class='icon'>▸</span>
-                </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  <ul class='list-reset py1-ul pl1'>
-                    <li class='h5'><span>Static members</span></li>
-                    
-                      <li><a
-                        href='#typesvalidator'
-                        class='regular pre-open'>
-                        .Validator
-                      </a></li>
-                    
-                      <li><a
-                        href='#typesdefinition'
-                        class='regular pre-open'>
-                        .Definition
-                      </a></li>
-                    
-                      <li><a
-                        href='#typesfields'
-                        class='regular pre-open'>
-                        .Fields
-                      </a></li>
-                    
-                      <li><a
-                        href='#typesconfig'
-                        class='regular pre-open'>
-                        .Config
-                      </a></li>
-                    
-                    </ul>
-                  
-                  
-                  
-                  
-                </div>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#validators'
-                  class=" toggle-sibling">
-                  validators
-                  <span class='icon'>▸</span>
-                </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  <ul class='list-reset py1-ul pl1'>
-                    <li class='h5'><span>Static members</span></li>
-                    
-                      <li><a
-                        href='#validatorsisempty'
-                        class='regular pre-open'>
-                        .isEmpty
-                      </a></li>
-                    
-                      <li><a
-                        href='#validatorsisstring'
-                        class='regular pre-open'>
-                        .isString
-                      </a></li>
-                    
-                      <li><a
-                        href='#validatorsisnoneemptystring'
-                        class='regular pre-open'>
-                        .isNoneEmptyString
-                      </a></li>
-                    
-                      <li><a
-                        href='#validatorsisnumberstring'
-                        class='regular pre-open'>
-                        .isNumberString
-                      </a></li>
-                    
-                      <li><a
-                        href='#validatorsisemail'
-                        class='regular pre-open'>
-                        .isEmail
-                      </a></li>
-                    
-                    </ul>
-                  
-                  
-                  
-                  
-                </div>
-                
-                </li>
-              
-            </ul>
-          </div>
-          <div class='mt1 h6 quiet'>
-            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
-          </div>
-        </div>
-      </div>
-      <div id='split-right' class='relative overflow-auto height-viewport-100'>
-        
-          
-            <div class='keyline-top-not py2'><section class='py2 clearfix'>
-
-  <h2 id='readme' class='mt0'>
-    README
-  </h2>
-
-  
-    <p><a href="https://travis-ci.org/on3iro/vally"><img src="https://travis-ci.org/on3iro/vally.svg?branch=master" alt="Build Status"></a>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title> - Documentation</title><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500|Roboto:300,500,700" rel="stylesheet"/><style>body{margin: 0;
+padding: 0;
+color: #000;
+font-family: Roboto, sans-serif;
+font-weight: 300;
+line-height: 26px;
+font-size: 17px;}*{-moz-box-sizing: border-box;
+box-sizing: border-box;}</style></head><body><main id="app"><div data-radium="true"><div style="position:fixed;box-shadow:0px 2px 3px 0px rgba(0, 0, 0, 0.25);width:100%;min-width:100%;margin-left:0px;margin-right:0px;height:65px;z-index:99;background:#FFFFFF;padding-top:10px;padding-bottom:10px;padding-left:20px;padding-right:20px;" data-radium="true"><div style="margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px;" class="rmq-87b609c0 rmq-159a7c96 rmq-27601239" data-radium="true"><div style="margin-left:-15px;margin-right:-15px;" data-radium="true"><div style="position:relative;min-height:1px;padding-left:15px;padding-right:15px;float:left;width:50.00000%;" class="rmq-aa1729d5 rmq-a22eaf97 rmq-1918856d rmq-6156e77b rmq-21ab0466 rmq-a01b93a4 rmq-d226cb7e rmq-5cc71c8" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:inherit;font-size:36px;margin-right:20px;"><g><path d="m30 22.5h-5c-1.3 0-2.5 1.3-2.5 2.5h10c0-1.3-1.2-2.5-2.5-2.5z m-2.1-16.2c-6.6 0-8.2 1.2-9.1 2.1-1-0.9-2.6-2.1-9.2-2.1s-9.6 1.7-9.6 3v22.9c1.1-0.6 4.6-1.9 8.4-2.2 4.4-0.4 9.1 0.4 9.1 1.2 0 0.7 0.3 1.3 1.2 1.3h0.1c0.9 0 1.2-0.6 1.2-1.2 0-0.9 4.6-1.7 9.1-1.3 3.7 0.3 7.3 1.6 8.4 2.2v-22.9c0-1.3-3.1-3-9.6-3z m-10.4 22.3c-1.2-0.6-4-1.1-7.5-1.1s-6.6 0.5-7.5 1.1v-17.3s2.5-2.4 7.5-2.4 7.5 1.1 7.5 2.4v17.3z m17.5 0c-0.9-0.6-4-1.1-7.5-1.1s-6.3 0.5-7.5 1.1v-17.3s2.5-2.4 7.5-2.4 7.5 1.1 7.5 2.4v17.3z m-5-11.1h-5c-1.3 0-2.5 1.3-2.5 2.5h10c0-1.3-1.2-2.5-2.5-2.5z m0-5h-5c-1.3 0-2.5 1.3-2.5 2.5h10c0-1.3-1.2-2.5-2.5-2.5z m-17.5 5h-5c-1.2 0-2.5 1.2-2.5 2.5h10c0-1.2-1.2-2.5-2.5-2.5z m0 5h-5c-1.2 0-2.5 1.2-2.5 2.5h10c0-1.2-1.2-2.5-2.5-2.5z m0-10h-5c-1.2 0-2.5 1.2-2.5 2.5h10c0-1.2-1.2-2.5-2.5-2.5z"></path></g></svg><div style="display:inline-block;" data-radium="true"><div style="text-transform:uppercase;font-family:Roboto, sans-serif;" data-radium="true"></div><div style="font-family:Roboto Mono, Menlo, Monaco, Courier, monospace;font-weight:300;" data-radium="true"></div></div></div><div style="position:relative;min-height:1px;padding-left:15px;padding-right:15px;float:right !important;width:25.00000%;text-align:right;font-size:36px;" class="rmq-aa1729d5 rmq-a22eaf97 rmq-1918856d rmq-6156e77b rmq-77267d84 rmq-5c0c1446 rmq-4605701c rmq-34ee8e6a" data-radium="true"><a href="https://on3iro.github.io/vally/"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m20 0c-11 0-20 9-20 20 0 8.8 5.7 16.3 13.7 19 1 0.2 1.3-0.5 1.3-1 0-0.5 0-2 0-3.7-5.5 1.2-6.7-2.4-6.7-2.4-0.9-2.3-2.2-2.9-2.2-2.9-1.9-1.2 0.1-1.2 0.1-1.2 2 0.1 3.1 2.1 3.1 2.1 1.7 3 4.6 2.1 5.8 1.6 0.2-1.3 0.7-2.2 1.3-2.7-4.5-0.5-9.2-2.2-9.2-9.8 0-2.2 0.8-4 2.1-5.4-0.2-0.5-0.9-2.6 0.2-5.3 0 0 1.7-0.5 5.5 2 1.6-0.4 3.3-0.6 5-0.6 1.7 0 3.4 0.2 5 0.7 3.8-2.6 5.5-2.1 5.5-2.1 1.1 2.8 0.4 4.8 0.2 5.3 1.3 1.4 2.1 3.2 2.1 5.4 0 7.6-4.7 9.3-9.2 9.8 0.7 0.6 1.4 1.9 1.4 3.7 0 2.7 0 4.9 0 5.5 0 0.6 0.3 1.2 1.3 1 8-2.7 13.7-10.2 13.7-19 0-11-9-20-20-20z"></path></g></svg></a></div><div style="clear:both;" data-radium="true"></div></div><div style="clear:both;" data-radium="true"></div></div></div><div style="margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px;padding-top:104px;" class="rmq-87b609c0 rmq-159a7c96 rmq-27601239" data-radium="true"><div style="margin-left:-15px;margin-right:-15px;" data-radium="true"><div style="position:fixed;min-height:1px;padding-left:15px;padding-right:15px;float:left;width:8.33333%;height:80%;max-width:300px;" class="rmq-aa1729d5 rmq-a22eaf97 rmq-1918856d rmq-6156e77b rmq-5c4c5b38 rmq-5c0c1446 rmq-4605701c rmq-34ee8e6a rmq-35757987 rmq-f09e82ae" data-radium="true"><div style="font-family:Roboto, sans-serif;border-radius:4px;padding-top:0;padding-bottom:0;margin-top:26px;border:1px solid #e6e9ed;font-weight:500;font-size:15px;line-height:18px;max-height:70vh;overflow-x:auto;" data-radium="true"><ul style="list-style:none;margin-top:0;margin-bottom:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-left:20px;padding-right:20px;padding-top:13px;padding-bottom:13px;border-bottom:1px solid #e6e9ed;" data-radium="true"><a style="color:#000;" href="#readme" data-radium="true">README</a></li></div><div data-radium="true"><li style="padding-left:20px;padding-right:20px;padding-top:13px;padding-bottom:13px;border-bottom:1px solid #e6e9ed;" data-radium="true"><a style="color:#000;" href="#types" data-radium="true">Types</a></li></div><div data-radium="true"><li style="padding-left:20px;padding-right:20px;padding-top:13px;padding-bottom:13px;border-bottom:1px solid #e6e9ed;" data-radium="true"><a style="color:#000;" href="#createconfig" data-radium="true">createConfig</a></li></div><div data-radium="true"><li style="padding-left:20px;padding-right:20px;padding-top:13px;padding-bottom:13px;border-bottom:1px solid #e6e9ed;" data-radium="true"><a style="color:#000;" href="#initwithbindings" data-radium="true">initWithBindings</a></li></div><div data-radium="true"><li style="padding-left:20px;padding-right:20px;padding-top:13px;padding-bottom:13px;border-bottom:1px solid #e6e9ed;" data-radium="true"><a style="color:#000;" href="#validate" data-radium="true">validate</a></li></div><div data-radium="true"><li style="padding-left:20px;padding-right:20px;padding-top:13px;padding-bottom:13px;border-bottom:1px solid #e6e9ed;" data-radium="true"><a style="color:#000;" href="#validatenode" data-radium="true">validateNode</a></li></div><div data-radium="true"><li style="padding-left:20px;padding-right:20px;padding-top:13px;padding-bottom:13px;border-bottom:1px solid #e6e9ed;" data-radium="true"><a style="color:#000;" href="#validators" data-radium="true">validators</a></li><li style="padding-left:20px;padding-right:20px;padding-top:13px;padding-bottom:13px;border-bottom:none;" data-radium="true"><div style="padding-top:0;" data-radium="true"><span style="text-transform:uppercase;font-size:13px;line-height:18px;color:#666;" data-radium="true">Static</span><ul style="list-style:none;padding-left:0;" data-radium="true"><li data-radium="true"><a href="#validatorsisempty" style="font-family:Roboto, sans-serif;font-weight:300;font-size:13px;line-height:16px;text-decoration:none;color:#555;" data-radium="true">isEmpty</a></li><li data-radium="true"><a href="#validatorsisstring" style="font-family:Roboto, sans-serif;font-weight:300;font-size:13px;line-height:16px;text-decoration:none;color:#555;" data-radium="true">isString</a></li><li data-radium="true"><a href="#validatorsisnoneemptystring" style="font-family:Roboto, sans-serif;font-weight:300;font-size:13px;line-height:16px;text-decoration:none;color:#555;" data-radium="true">isNoneEmptyString</a></li><li data-radium="true"><a href="#validatorsisnumberstring" style="font-family:Roboto, sans-serif;font-weight:300;font-size:13px;line-height:16px;text-decoration:none;color:#555;" data-radium="true">isNumberString</a></li><li data-radium="true"><a href="#validatorsisemail" style="font-family:Roboto, sans-serif;font-weight:300;font-size:13px;line-height:16px;text-decoration:none;color:#555;" data-radium="true">isEmail</a></li></ul></div></li></div></ul></div></div><div style="position:relative;min-height:1px;padding-left:15px;padding-right:15px;float:left;width:100.00000%;" class="rmq-aa1729d5 rmq-a22eaf97 rmq-1918856d rmq-6156e77b rmq-89bb2272 rmq-2d0e68c6 rmq-3752549c rmq-3b9282ea rmq-4d29a8df rmq-ea7683a5 rmq-ad95cc33" data-radium="true"><div class="content" data-radium="true"><style>h1, h2, h3, h4, h5, h6{font-family: Roboto, sans-serif;
+font-weight: 300;}h1{font-size: 48px;
+line-height: 72px;}h2{font-size: 24px;
+line-height: 36px;}h3{font-size: 19px;
+line-height: 29px;
+font-weight: 400;}h4{font-size: 17px;
+line-height: 22px;
+font-weight: 400;}a{text-decoration: none;
+color: #00AAFF;
+:hover: [object Object];}a.anchor:before{content: "";
+display: block;
+height: 100px;
+margin: -80px 0 0;}.content blockquote{padding-left: 20px;
+margin: 0;
+border-left: 4px solid #eee;}.content ul, content li{list-style: none;}.content ul li:before{color: #CCC;
+float: left;
+margin-left: -20px;
+margin-top: 1px;
+content: "•";}pre.hljs, pre > code{margin-bottom: 30px;
+font-family: Roboto Mono, Menlo, Monaco, Courier, monospace;
+padding: 12px 15px 12px 15px;
+border-radius: 4px;
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+display: block;
+position: relative;
+overflow-x: auto;
+font-size: 13px;
+color: #666;
+white-space: pre;}code{font-family: Roboto Mono, Menlo, Monaco, Courier, monospace;
+display: inline;
+font-size: 13px;
+font-weight: 400;
+margin: 0 2px;
+padding: 1px 6px;
+box-shadow: 0 0 0 1px #DDD;
+white-space: nowrap;
+border-radius: 4px;}.hljs{display: block;
+overflow-x: auto;}.hljs-comment, .hljs-quote{color: #998;
+font-style: italic;}.hljs-keyword, .hljs-selector-tag, .hljs-subst{color: #333;
+font-weight: bold;}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr{color: #008080;}.hljs-string, .hljs-doctag{color: #d14;}.hljs-title, .hljs-section, .hljs-selector-id{color: #900;
+font-weight: bold;}.hljs-subst{font-weight: normal;}.hljs-type, .hljs-class .hljs-title{color: #458;
+font-weight: bold;}.hljs-tag, .hljs-name, .hljs-attribute{color: #000080;
+font-weight: normal;}.hljs-regexp, .hljs-link{color: #009926;}.hljs-symbol, .hljs-bullet{color: #990073;}.hljs-built_in, .hljs-builtin-name{color: #0086b3;}.hljs-meta{color: #999;
+font-weight: bold;}.hljs-deletion{background: #fdd;}.hljs-addition{background: #dfd;}.hljs-emphasis{font-style: italic;}.hljs-strong{font-weight: bold;}</style><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="readme"></a>README</h1><div><p><a href="https://travis-ci.org/on3iro/vally"><img src="https://travis-ci.org/on3iro/vally.svg?branch=master" alt="Build Status"></a>
 <a href="https://coveralls.io/github/on3iro/vally?branch=master"><img src="https://coveralls.io/repos/github/on3iro/vally/badge.svg?branch=master" alt="Coverage Status"></a>
 <a href="https://badge.fury.io/js/vally"><img src="https://badge.fury.io/js/vally.svg" alt="npm version"></a>
 <a href="https://codeclimate.com/github/on3iro/vally/maintainability"><img src="https://api.codeclimate.com/v1/badges/62a915f14bfd69e6a10f/maintainability" alt="Maintainability"></a>
@@ -276,894 +167,114 @@ be used / passed around.</li>
 the listeners later on.</li>
 </ol>
 </blockquote>
-
-  
-</section>
-</div>
-          
-        
-          
-            <div class='keyline-top-not py2'><section class='py2 clearfix'>
-
-  <h2 id='configuration' class='mt0'>
-    Configuration
-  </h2>
-
-  
-    <h3>Config</h3>
-<table>
-<thead>
-<tr>
-<th align="left">property</th>
-<th>type</th>
-<th align="center">default</th>
-<th align="center">required</th>
-<th align="left">description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">containerSelector</td>
-<td>string</td>
-<td align="center"><code>'body'</code></td>
-<td align="center">-</td>
-<td align="left"><code>querySelector</code>
- compatible string. Used to get the wrapping element to look for fields.</td>
-</tr>
-<tr>
-<td align="left">fields</td>
-<td>Array
-<Field></td>
-<td align="center"><code>[]</code></td>
-<td align="center">yes</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">DOMStub :warning:</td>
-<td>Object</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="left">This is a dev-only feature used for unit-tests - do not use this in production!</td>
-</tr>
-</tbody>
-</table>
-<h3>Field</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>type</th>
-<th align="center">default</th>
-<th align="center">required</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>selector</td>
-<td>string</td>
-<td align="center">-</td>
-<td align="center">yes</td>
-<td><code>querySelector</code>
- compatible string. Used to get the input node.</td>
-</tr>
-<tr>
-<td>errorSelector</td>
-<td>string</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td><code>querySelector</code>
- compatible string. Used to get the element to add the 
-<code>errorClass</code>
- to. If no class is specified the 
-<code>&#x3C;input></code>
- field it self will be targeted</td>
-</tr>
-<tr>
-<td>errorClass</td>
-<td>string</td>
-<td align="center"><code>'error'</code></td>
-<td align="center">-</td>
-<td>CSS class to add to the specified DOM element.</td>
-</tr>
-<tr>
-<td>validators</td>
-<td>Array
-<Validator></td>
-<td align="center">-</td>
-<td align="center">yes</td>
-<td>Array of Validator functions</td>
-</tr>
-</tbody>
-</table>
-<h3>Validators</h3>
-<p>Whenever <em>vally</em> is run each input value will consequtively be applied to each of its validator functions.
-A validation function should always look like this:</p>
-<pre class='hljs'>type Validator = <span class="hljs-function">(<span class="hljs-params">any</span>) =&gt;</span> boolean</pre>
-<p>Predefined validators can be found inside the API-documentation.</p>
-
-  
-</section>
-</div>
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='types'>
-      types
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/types.js#L7-L7'>
-      <span>src/types.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>types</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Static Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='typesvalidator'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>Validator</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/types.js#L13-L16'>
-      <span>src/types.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Validator</p>
-
-
-  <div class='pre p1 fill-light mt0'>Validator</div>
-  
-    <p>
-      Type:
-      {fn: ValidatorFn, type: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?}
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>fn</span> <code class='quiet'>(ValidatorFn)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
-          
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='typesdefinition'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>Definition</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/types.js#L24-L27'>
-      <span>src/types.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Definition</p>
-
-
-  <div class='pre p1 fill-light mt0'>Definition</div>
-  
-    <p>
-      Type:
-      {node: <a href="https://developer.mozilla.org/docs/Web/API/Node/nextSibling">Node</a>, validators: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Validator>}
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>node</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/API/Node/nextSibling">Node</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>validators</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Validator>)</code>
-          
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='typesfields'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>Fields</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/types.js#L33-L33'>
-      <span>src/types.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Fields</p>
-
-
-  <div class='pre p1 fill-light mt0'>Fields</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Definition>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='typesconfig'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>Config</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/types.js#L50-L52'>
-      <span>src/types.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Config</p>
-
-
-  <div class='pre p1 fill-light mt0'>Config</div>
-  
-    <p>
-      Type:
-      {fields: Fields}
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>fields</span> <code class='quiet'>(Fields)</code>
-          
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='validators'>
-      validators
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/validatorFns.js#L7-L7'>
-      <span>src/validatorFns.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>validators</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Static Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='validatorsisempty'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>isEmpty(val)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/validatorFns.js#L61-L61'>
-      <span>src/validatorFns.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Validates if a value is undefined or its length === 0</p>
-
-
-  <div class='pre p1 fill-light mt0'>isEmpty(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>val</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='validatorsisstring'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>isString(val)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/validatorFns.js#L81-L81'>
-      <span>src/validatorFns.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>isString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>val</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='validatorsisnoneemptystring'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>isNoneEmptyString(val)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/validatorFns.js#L89-L89'>
-      <span>src/validatorFns.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>isNoneEmptyString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>val</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='validatorsisnumberstring'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>isNumberString(val)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/validatorFns.js#L97-L101'>
-      <span>src/validatorFns.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>isNumberString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>val</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='validatorsisemail'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>isEmail(val)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/on3iro/vally/blob/1b86a45f0ed8bdad7a0c018720d10ffb0e250070/src/validatorFns.js#L109-L113'>
-      <span>src/validatorFns.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>isEmail(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>val</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-      </div>
-    </div>
-  <script src='assets/anchor.js'></script>
-  <script src='assets/split.js'></script>
-  <script src='assets/site.js'></script>
-</body>
-</html>
+</div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="types"></a>Types</h1><div><p>Vally's documentation makes heavy use of types.
+If certain parameters or return values are unclear, please refer to this section.</p>
+<h2>ValidatorFn</h2>
+<p>A function that checks if a value passes certain tests</p>
+<pre class='hljs'>type ValidatorFn = <span class="hljs-function">(<span class="hljs-params">val: any</span>) =&gt;</span> boolean</pre>
+<h2>Node</h2>
+<pre class='hljs'>type Node = HTMLInputElement | HTMLSelectElement</pre>
+<h2>Validator</h2>
+<p>The validator object should always at least contain a valid <code>ValidatorFn</code>.
+You can add any other properties you might need for later evaluation.</p>
+<pre class='hljs'>type Validator = {
+  fn: ValidatorFn,
+  type?: string
+}</pre>
+<h2>Definition</h2>
+<p>A field definition. Should always contain a node to validate and an array
+of its validators.</p>
+<pre class='hljs'>type Definition = {|
+  node: Node,
+  <span class="hljs-attr">validators</span>: <span class="hljs-built_in">Array</span>&lt;Validator&gt;
+|}</pre>
+<h2>Fields</h2>
+<pre class='hljs'>type Fields = <span class="hljs-built_in">Array</span>&lt;Definition&gt;</pre>
+<h2>Config</h2>
+<p>Currently only holds FieldDefinitions. Might be enhanced in the future.</p>
+<pre class='hljs'>type Config = {|
+  fields: Fields
+|}</pre>
+<h2>Validation</h2>
+<p>A validation represents the validation result of a single node.
+If validation fails at any point, <code>validator</code> will be the <code>Validator</code>-object
+that failed the test.</p>
+<pre class='hljs'>type Validation = {|
+  isValid: boolean,
+  node: Node,
+  validator: ?Validator
+|}</pre>
+<h2>Result</h2>
+<p>Result of the validation of all field definitions (from a single function call).
+If any field failed, the whole validation is marked as invalid.</p>
+<pre class='hljs'>type Result = {|
+  isValid: boolean,
+  <span class="hljs-attr">validations</span>: <span class="hljs-built_in">Array</span>&lt;Validation&gt;
+|}</pre>
+</div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="createconfig"></a>createConfig<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/createConfig.js#L16-L44" title="src/createConfig.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>This is just a simple helper/wrapper function to automatically fetch
+single nodes and return a valid configuration. Instead of directly
+passing in the nodes, the configuration will expect a selector-string
+for each of the specified fields. Behind the scenes createConfig will
+then invoke document.querySelector(selector) and add it to the returned
+config. If a node cannot be found, a console warning is emitted and the
+field will be skipped.</p>
+</div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>specs: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;{selector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, validators: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Validator>}></code>:  <div style="display:inline-block;" data-radium="true">Specifications that describe each field and their corresponding Validators
+</div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code>Config</code><span> a valid vally config to use with vally.validate, vally.initWithBindings etc.
+</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="initwithbindings"></a>initWithBindings<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/initWithBindings.js#L29-L47" title="src/initWithBindings.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Adds an eventListener to each given node. The listener is wrapped
+with a debounce function and will invoke the callback when the specified
+event is triggered.
+An array of removeEventListener functions is returned, so listeners could
+be removed if necesseary.</p>
+</div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li><li style="padding-bottom:13px;" data-radium="true"><code>config.fields: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Field></code>:  <div style="display:inline-block;" data-radium="true">Array of field definitions
+</div></li></div><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true">event to be bound to
+</div></li></div><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>debounceTime: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> (=0)</code>:  <div style="display:inline-block;" data-radium="true">time to debounce callback invocation (in ms)
+</div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code><span> RemoveListeners
+</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validate"></a>validate<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validate.js#L28-L60" title="src/validate.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Validates a list of HTMLInput/HTMLSelect elements and returns the result of
+the validation. Each element value will be piped through the specified list
+of validator functions. If validation fails at any point, it will be represented
+inside the respective validation object.</p>
+</div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li><li style="padding-bottom:13px;" data-radium="true"><code>config.fields: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Field></code>:  <div style="display:inline-block;" data-radium="true">an array of Field definitions
+</div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code>Result</code><span> the general 'isValid' property determines if the set of fields as a whole validated successfully
+<ul>
+<li>each validation represents a single field { isValid: boolean, node: ?HTMLElement, validator: ?Validator }</li>
+<li>if validation.isValid is false, the failing validator will be returned, so that it is possible to react
+on a specific failing validator</li>
+</ul>
+</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validatenode"></a>validateNode<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validateNode.js#L19-L35" title="src/validateNode.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Validates a single node by passing it to each of the specified validator
+functions.</p>
+</div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>definition: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li><li style="padding-bottom:13px;" data-radium="true"><code>definition.validators: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Validator></code>:  <div style="display:inline-block;" data-radium="true">Contains objects each representing
+a single validator. A validator should always have an 'fn'-property with
+a function of the type (val: any) => boolean. You can specify other properties
+on the object as needed.
+</div></li><li style="padding-bottom:13px;" data-radium="true"><code>definition.node: any</code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code>{isValid: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, node: <a href="https://developer.mozilla.org/docs/Web/API/Node/nextSibling">Node</a>?, validator: Validator?}</code><span> 
+</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validators"></a>validators<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L7-L7" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div></div><div data-radium="true"><h2 style="text-transform:uppercase;" data-radium="true">static</h2><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisempty"></a>validators.isEmpty<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L61-L61" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isEmpty(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"><p>Validates if a value is undefined or its length === 0</p>
+</div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisstring"></a>validators.isString<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L81-L81" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisnoneemptystring"></a>validators.isNoneEmptyString<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L89-L89" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isNoneEmptyString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisnumberstring"></a>validators.isNumberString<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L97-L101" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isNumberString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisemail"></a>validators.isEmail<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L109-L113" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isEmail(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div></div></div></div></div><div style="clear:both;" data-radium="true"></div></div><div style="clear:both;" data-radium="true"></div></div><style>@media (min-width: 768px) and (max-width: 991px){ .rmq-87b609c0{width: 750px !important;}}
+@media (min-width: 992px) and (max-width: 1199px){ .rmq-159a7c96{width: 970px !important;}}
+@media (min-width: 1200px){ .rmq-27601239{width: 1170px !important;}}
+@media (min-width: 480px) and (max-width: 767px){ .rmq-aa1729d5{float: left !important;}}
+@media (min-width: 768px) and (max-width: 991px){ .rmq-a22eaf97{float: left !important;}}
+@media (min-width: 992px) and (max-width: 1199px){ .rmq-1918856d{float: left !important;}}
+@media (min-width: 1200px){ .rmq-6156e77b{float: left !important;}}
+@media (min-width: 480px) and (max-width: 767px) { .rmq-21ab0466{width: 50.00000% !important;}}
+@media (min-width: 768px) and (max-width: 991px) { .rmq-a01b93a4{width: 50.00000% !important;}}
+@media (min-width: 992px) and (max-width: 1199px) { .rmq-d226cb7e{width: 50.00000% !important;}}
+@media (min-width: 1200px) { .rmq-5cc71c8{width: 50.00000% !important;}}
+@media (min-width: 480px) and (max-width: 767px) { .rmq-77267d84{width: 25.00000% !important;}}
+@media (min-width: 768px) and (max-width: 991px) { .rmq-5c0c1446{width: 25.00000% !important;}}
+@media (min-width: 992px) and (max-width: 1199px) { .rmq-4605701c{width: 25.00000% !important;}}
+@media (min-width: 1200px) { .rmq-34ee8e6a{width: 25.00000% !important;}}
+@media (min-width: 480px) and (max-width: 767px) { .rmq-5c4c5b38{width: 8.33333% !important;}}
+@media (max-width: 479px){ .rmq-35757987{display: none !important;}}
+@media (min-width: 480px) and (max-width: 767px)  { .rmq-f09e82ae{display: none !important;}}
+@media (min-width: 480px) and (max-width: 767px) { .rmq-89bb2272{width: 100.00000% !important;}}
+@media (min-width: 768px) and (max-width: 991px) { .rmq-2d0e68c6{width: 66.66667% !important;}}
+@media (min-width: 992px) and (max-width: 1199px) { .rmq-3752549c{width: 66.66667% !important;}}
+@media (min-width: 1200px) { .rmq-3b9282ea{width: 66.66667% !important;}}
+@media (min-width: 768px) and (max-width: 991px)  { .rmq-4d29a8df{left: 33.33333% !important;}}
+@media (min-width: 992px) and (max-width: 1199px)  { .rmq-ea7683a5{left: 33.33333% !important;}}
+@media (min-width: 1200px)  { .rmq-ad95cc33{left: 33.33333% !important;}}</style></div></main></body></html>

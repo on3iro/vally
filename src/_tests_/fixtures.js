@@ -1,6 +1,12 @@
 // @flow
 
+function querySelector (sel: string) {
+  return this[sel]
+}
+
 const nodeFactory = (display: '' | 'none' = ''): {
+  mock: boolean,
+  querySelector: Function,
   insertAdjacentHTML: Function,
   addEventListener: Function,
   removeEventListener: Function,
@@ -13,6 +19,8 @@ const nodeFactory = (display: '' | 'none' = ''): {
   }
 } => {
   return {
+    mock: true,
+    querySelector,
     insertAdjacentHTML: jest.fn(),
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),

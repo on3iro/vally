@@ -11,7 +11,7 @@ import {
 
 import validate from '../validate'
 
-describe.only('validate()', () => {
+describe('validate()', () => {
   const nonEmptyValidator = {
     fn: isNoneEmptyString,
     type: 'NONE_EMPTY'
@@ -71,5 +71,26 @@ describe.only('validate()', () => {
     const failingResult = result.validations.find(v => !v.isValid)
     // $FlowFixMe
     expect(failingResult.validator.type).toBe('NONE_EMPTY')
+  })
+
+  it('shoul return isValid: false if node is undefined', () => {
+    const result = validate({
+      fields: [
+        {
+          // $FlowFixMe
+          node: undefined,
+          validators: [ nonEmptyValidator ]
+        }
+      ]
+    })
+
+    expect(result).toEqual({
+      isValid: false,
+      validations: [{
+        isValid: false,
+        node: undefined,
+        validator: null
+      }]
+    })
   })
 }) // end validate()

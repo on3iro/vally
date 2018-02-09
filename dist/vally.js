@@ -233,6 +233,35 @@ var initWithBindings = function initWithBindings(_ref, event, callback) {
   });
 };
 
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
+var createConfig = function createConfig(specs) {
+  return {
+    fields: specs.reduce(function (acc, spec) {
+      var node = document.querySelector(spec.selector);
+
+      if (!(node && (node instanceof HTMLInputElement || node instanceof HTMLSelectElement))) {
+        console.warn('vally, createConfig: node with selector "' + spec.selector + '" could not be found!');
+
+        return acc;
+      }
+
+      return [].concat(toConsumableArray(acc), [{
+        node: node,
+        validators: spec.validators
+      }]);
+    }, [])
+  };
+};
+
 exports.isEmail = isEmail;
 exports.isEmpty = isEmpty;
 exports.isNoneEmptyString = isNoneEmptyString;
@@ -241,6 +270,7 @@ exports.isString = isString;
 exports.validateNode = validateNode;
 exports.validate = validate;
 exports.initWithBindings = initWithBindings;
+exports.createConfig = createConfig;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

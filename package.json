@@ -49,7 +49,8 @@
       "js"
     ],
     "collectCoverageFrom": [
-      "**/src/**/*.{js}"
+      "**/src/**/*.{js}",
+      "!**/src/**/fixtures.js"
     ],
     "moduleNameMapper": {
       "\\.(jpeg|jpg|png|gif|eot|webp|svg|ttf|woff2|mp3|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",

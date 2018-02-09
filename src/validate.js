@@ -13,7 +13,12 @@ const validate = ({ fields }: Config): Result => {
   const validations = fields.map(f => {
     if (!f.node) {
       console.warn('vally, validate: passed node is undefined! Please check your field definitions.')
-      console.trace()
+
+      return {
+        isValid: false,
+        node: f.node,
+        validator: null
+      }
     }
 
     const isHidden = f.node.offsetParent === null || f.node.style.display === 'none'

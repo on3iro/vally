@@ -3,6 +3,7 @@
 import validate from './validate'
 import validateNode from './validateNode'
 import initWithBindings from './initWithBindings'
+import createConfig from './createConfig'
 
 import {
   isEmail,
@@ -22,5 +23,6 @@ export {
   // validation
   validateNode,
   validate,
-  initWithBindings
+  initWithBindings,
+  createConfig
 }

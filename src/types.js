@@ -1,15 +1,12 @@
 // @flow
 
 /**
-  * @namespace types
+  * @module types
+  * @private
   */
 
 export type ValidatorFn = (val:any) => boolean
 
-/**
-  * Validator
-  * @memberof types
-  */
 export type Validator = {
   fn: ValidatorFn,
   type?: string
@@ -17,19 +14,11 @@ export type Validator = {
 
 export type Node = HTMLInputElement | HTMLSelectElement
 
-/**
-  * Definition
-  * @memberof types
-  */
 export type Definition = {|
   node: Node,
   validators: Array<Validator>
 |}
 
-/**
-  * Fields
-  * @memberof types
-  */
 export type Fields = Array<Definition>
 
 export type Validation = {|
@@ -43,10 +32,6 @@ export type Result = {|
   validations: Array<Validation>
 |}
 
-/**
-  * Config
-  * @memberof types
-  */
 export type Config = {|
   fields: Fields
 |}

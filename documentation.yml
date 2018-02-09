@@ -1,6 +1,5 @@
 toc:
   - name: README
     file: README.md
-  - name: Configuration
-    file: manual/config.md
-
+  - name: Types
+    file: Types.md

@@ -18,7 +18,7 @@ import type { ValidatorFn } from './types'
   * @param {RegExp} re - regex to test with
   * @return {boolean}
   */
-const testRegex = (val:string, re:RegExp) => {
+export const testRegex = (val:string, re:RegExp) => {
   if (!isString(val)) return false
 
   return re.test(val)
@@ -49,7 +49,7 @@ export const isNull:ValidatorFn = (val:any):boolean => val === null
   * @param {string} val
   * @return {boolean}
   */
-export const isNil:ValidatorFn = (val:any):boolean => isUndefined(val) && isNull(val)
+export const isNil:ValidatorFn = (val:any):boolean => isUndefined(val) || isNull(val)
 
 /**
   * @function isNumber

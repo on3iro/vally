@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createConfig() should return valid config with nodes 1`] = `
+Object {
+  "fields": Array [
+    Object {
+      "node": <input
+        class="noneEmptyNode"
+        value="some string"
+      />,
+      "validators": Array [
+        Object {
+          "fn": [Function],
+          "type": "NONE_EMPTY",
+        },
+      ],
+    },
+    Object {
+      "node": <input
+        class="numberNode"
+        value="8"
+      />,
+      "validators": Array [
+        Object {
+          "fn": [Function],
+          "type": "NUMBER",
+        },
+      ],
+    },
+    Object {
+      "node": <input
+        class="emptyStrNode"
+        required=""
+        value=""
+      />,
+      "validators": Array [
+        Object {
+          "fn": [Function],
+          "type": "NONE_EMPTY",
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`createConfig() should skip spec if node cannot be found 1`] = `
+Object {
+  "fields": Array [
+    Object {
+      "node": <input
+        class="noneEmptyNode"
+        value="some string"
+      />,
+      "validators": Array [
+        Object {
+          "fn": [Function],
+          "type": "NONE_EMPTY",
+        },
+      ],
+    },
+    Object {
+      "node": <input
+        class="numberNode"
+        value="8"
+      />,
+      "validators": Array [
+        Object {
+          "fn": [Function],
+          "type": "NUMBER",
+        },
+      ],
+    },
+    Object {
+      "node": <input
+        class="emptyStrNode"
+        required=""
+        value=""
+      />,
+      "validators": Array [
+        Object {
+          "fn": [Function],
+          "type": "NONE_EMPTY",
+        },
+      ],
+    },
+  ],
+}
+`;

@@ -1,7 +1,7 @@
 // @flow
 
 /**
-  * @namespace types
+  * @module types
   */
 
 export type ValidatorFn = (val:any) => boolean

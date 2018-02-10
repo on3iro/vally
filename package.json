@@ -38,7 +38,7 @@
     "test:coverage": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watch",
     "test:coveralls": "cross-env NODE_ENV=test jest --coverage --runInBand && cat ./coverage/lcov.info | coveralls",
-    "docs": "documentation build src/** -f html -o docs --github --config documentation.yml",
+    "docs": "documentation build src/** -f html -o docs --theme node_modules/clean-documentation-theme --github --config documentation.yml",
     "postversion": "npm run docs && git add . && git commit --amend --no-edit"
   },
   "jest": {
@@ -89,7 +89,7 @@
     "email": "dev@on3iro.de"
   },
   "contributors": [],
-  "homepage": "-",
+  "homepage": "https://on3iro.github.io/vally/",
   "dependencies": {},
   "engines": {},
   "devDependencies": {
@@ -101,6 +101,7 @@
     "babel-preset-env": "1.6.1",
     "babel-preset-flow": "6.23.0",
     "babel-preset-stage-3": "6.24.1",
+    "clean-documentation-theme": "^0.5.2",
     "coveralls": "3.0.0",
     "cross-env": "5.1.3",
     "documentation": "^5.3.5",

@@ -4,6 +4,22 @@
 	(factory((global.vally = {})));
 }(this, (function (exports) { 'use strict';
 
+
+
+var types = Object.freeze({
+
+});
+
+/**
+  * Validates a single node by passing it to each of the specified validator
+  * functions.
+  * @param {HTMLInputElement | HTMLSelectElement} $0.node - Element to validate
+  * @param {Array<Validator>} $0.validators - Contains objects each representing
+  * a single validator. A validator should always have an 'fn'-property with
+  * a function of the type (val: any) => boolean. You can specify other properties
+  * on the object as needed.
+  * @return {{ isValid: boolean, node: ?HTMLElement, validator: ?Validator }}
+  */
 var validateNode = function validateNode(_ref) {
   var node = _ref.node,
       validators = _ref.validators;
@@ -145,13 +161,32 @@ var isEmail = function isEmail(val) {
   return testRegex(val, re);
 };
 
+/**
+  * Validates a list of HTMLInput/HTMLSelect elements and returns the result of
+  * the validation. Each element value will be piped through the specified list
+  * of validator functions. If validation fails at any point, it will be represented
+  * inside the respective validation object.
+  * @function validate
+  * @public
+  * @param {Array<Field>} $0.fields - an array of Field definitions
+  * @return {{ isValid: boolean, validations: Array<Validation> }
+  *   - the general 'isValid' property determines if the set of fields as a whole validated successfully
+  *   - each validation represents a single field { isValid: boolean, node: ?HTMLElement, validator: ?Validator }
+  *   - if validation.isValid is false, the failing validator will be returned, so that it is possible to react
+  *   on a specific failing validator
+  */
 var validate = function validate(_ref) {
   var fields = _ref.fields;
 
   var validations = fields.map(function (f) {
     if (!f.node) {
       console.warn('vally, validate: passed node is undefined! Please check your field definitions.');
-      console.trace();
+
+      return {
+        isValid: false,
+        node: f.node,
+        validator: null
+      };
     }
 
     var isHidden = f.node.offsetParent === null || f.node.style.display === 'none';
@@ -211,6 +246,20 @@ var debounce = function debounce(fn, time) {
   };
 };
 
+/**
+ * Adds an eventListener to each given node. The listener is wrapped
+ * with a debounce function and will invoke the callback when the specified
+ * event is triggered.
+ * An array of removeEventListener functions is returned, so listeners could
+ * be removed if necesseary.
+ *
+  * @function initWithBindings
+  * @param $0.fields - Array of field definitions
+  * @param event - event to be bound on
+  * @param callback - Function to invoke when event is triggered on node
+  * @param debounceTime - time to debounce callback invocation (in ms)
+  * @return {Array<() => node.removeEventListener()>} - RemoveListeners
+  */
 var initWithBindings = function initWithBindings(_ref, event, callback) {
   var fields = _ref.fields;
   var debounceTime = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
@@ -243,12 +292,24 @@ var toConsumableArray = function (arr) {
   }
 };
 
+/**
+  * This is just a simple helper/wrapper function to automatically fetch
+  * single nodes and return a valid configuration. Instead of directly
+  * passing in the nodes, the configuration will expect a selector-string
+  * for each of the specified fields. Behind the scenes createConfig will
+  * then invoke document.querySelector(selector) and add it to the returned
+  * config. If a node cannot be found, a console warning is emitted and the
+  * field will be skipped.
+  * @param specs - Specifications that describe each field and their corresponding Validators
+  * @return {Config} a valid vally config to use with vally.validate, vally.initWithBindings etc.
+  */
 var createConfig = function createConfig(specs) {
+  // $FlowFixMe
   return {
     fields: specs.reduce(function (acc, spec) {
       var node = document.querySelector(spec.selector);
 
-      if (!(node && (node instanceof HTMLInputElement || node instanceof HTMLSelectElement))) {
+      if (!(node && (node.mock || node instanceof HTMLInputElement || node instanceof HTMLSelectElement))) {
         console.warn('vally, createConfig: node with selector "' + spec.selector + '" could not be found!');
 
         return acc;
@@ -271,6 +332,7 @@ exports.validateNode = validateNode;
 exports.validate = validate;
 exports.initWithBindings = initWithBindings;
 exports.createConfig = createConfig;
+exports.types = types;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

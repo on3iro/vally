@@ -11,6 +11,20 @@ import validate from './validate'
 
 type RemoveListeners = Array<() => void>
 
+/**
+ * Adds an eventListener to each given node. The listener is wrapped
+ * with a debounce function and will invoke the callback when the specified
+ * event is triggered.
+ * An array of removeEventListener functions is returned, so listeners could
+ * be removed if necesseary.
+ *
+  * @function initWithBindings
+  * @param $0.fields - Array of field definitions
+  * @param event - event to be bound on
+  * @param callback - Function to invoke when event is triggered on node
+  * @param debounceTime - time to debounce callback invocation (in ms)
+  * @return {Array<() => node.removeEventListener()>} - RemoveListeners
+  */
 const initWithBindings = (
   { fields }: Config,
   event: string,

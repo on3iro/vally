@@ -1,7 +1,5 @@
 toc:
   - name: README
     file: README.md
-  - name: types
-    description: |
-      This documentation makes heavy use of specified types. If you are unsure
-      about any parameter or return value have a look at this section.
+  - name: Types
+    file: Types.md

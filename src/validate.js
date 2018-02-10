@@ -14,10 +14,12 @@ import { isEmpty } from './validatorFns'
   * the validation. Each element value will be piped through the specified list
   * of validator functions. If validation fails at any point, it will be represented
   * inside the respective validation object.
+  *
   * @function validate
   * @public
-  * @param {Array<Field>} $0.fields - an array of Field definitions
-  * @return {{ isValid: boolean, validations: Array<Validation> }
+  * @param {Object} config
+  * @param {Array<Field>} config.fields - an array of Field definitions
+  * @return {Result}
   *   - the general 'isValid' property determines if the set of fields as a whole validated successfully
   *   - each validation represents a single field { isValid: boolean, node: ?HTMLElement, validator: ?Validator }
   *   - if validation.isValid is false, the failing validator will be returned, so that it is possible to react

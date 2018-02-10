@@ -8,12 +8,13 @@ import type {
 /**
   * Validates a single node by passing it to each of the specified validator
   * functions.
-  * @param {HTMLInputElement | HTMLSelectElement} $0.node - Element to validate
-  * @param {Array<Validator>} $0.validators - Contains objects each representing
+  * @param {Object} definition
+  * @param {Node} defintion.node - Element to validate
+  * @param {Array<Validator>} definition.validators - Contains objects each representing
   * a single validator. A validator should always have an 'fn'-property with
   * a function of the type (val: any) => boolean. You can specify other properties
   * on the object as needed.
-  * @return {{ isValid: boolean, node: ?HTMLElement, validator: ?Validator }}
+  * @return {{ isValid: boolean, node: ?Node, validator: ?Validator }}
   */
 const validateNode = ({ node, validators }: Definition): Validation =>
   validators.reduce((acc, validator) => {

@@ -19,11 +19,12 @@ type RemoveListeners = Array<() => void>
  * be removed if necesseary.
  *
   * @function initWithBindings
-  * @param $0.fields - Array of field definitions
-  * @param event - event to be bound on
-  * @param callback - Function to invoke when event is triggered on node
-  * @param debounceTime - time to debounce callback invocation (in ms)
-  * @return {Array<() => node.removeEventListener()>} - RemoveListeners
+  * @param {Object} config
+  * @param {Array<Field>} config.fields - Array of field definitions
+  * @param {string} event - event to be bound to
+  * @param {(e: Event, res: Result) => any} callback - Function to invoke when event is triggered on node
+  * @param {number} [debounceTime=0] - time to debounce callback invocation (in ms)
+  * @return {Array} - RemoveListeners
   */
 const initWithBindings = (
   { fields }: Config,

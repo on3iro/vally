@@ -57,17 +57,14 @@ font-weight: bold;}.hljs-deletion{background: #fdd;}.hljs-addition{background: #
 <p><a href="https://on3iro.github.io/vally"><img src="https://img.shields.io/badge/docs-API-39CCCC.svg" alt="api docs"></a>
 <a href="https://github.com/on3iro/vally"><img src="https://img.shields.io/badge/GitHub-vally-39CCCC.svg" alt="GitHub"></a></p>
 <h1>vally</h1>
-<p><strong>vally</strong> is a simple ES6 form field validation library, that helps
-to determine if field values inside a container element pass certain tests.</p>
+<p><strong>vally</strong> is a simple ES6, zero-dependency form field validation library, that helps
+to determine if <code>&#x3C;input></code>-values pass certain tests.
+The library just provides a set of useful helper functions. Most of the DOM-manipulation
+and validation handling still lies in the hands of the user to ensure as much
+flexibility as possible.</p>
 <!-- vim-markdown-toc GFM -->
 <ul>
 <li><a href="#installation">Installation</a></li>
-<li>
-<p><a href="#usage">Usage</a></p>
-<ul>
-<li><a href="#example">Example</a></li>
-</ul>
-</li>
 <li>
 <p><a href="#api">API</a></p>
 <ul>
@@ -80,13 +77,34 @@ to determine if field values inside a container element pass certain tests.</p>
 <li><a href="#how-can-i-specify-a-field-as-_required_">How can i specify a field as <em>required</em>?</a></li>
 <li><a href="#what-happens-to-inputs-that-are-not-displayed">What happens to inputs that are not displayed?</a></li>
 <li><a href="#how-can-i-bind-vally-to-certain-events">How can I bind vally to certain events?</a></li>
+<li><a href="#why-does-vally-ship-so-few-validator-functions">Why does vally ship so few validator functions?</a></li>
+<li>
+<p><a href="#how-can-i-use-a-validator-function-with-multiple-arguments">How can I use a validator function with multiple arguments?</a></p>
+<ul>
+<li><a href="#example">Example:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#examples">Examples</a></p>
+<ul>
+<li><a href="#simple-example">Simple Example</a></li>
+<li>
+<p><a href="#complex-example">Complex example</a></p>
+<ul>
+<li><a href="#indexhtml">index.html</a></li>
+<li><a href="#configjs">config.js</a></li>
+<li><a href="#indexjs">index.js</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <!-- vim-markdown-toc -->
 <h2>Installation</h2>
 <pre class='hljs'>npm i --save vally</pre>
-<p>You can either use the build from inide the <code>dist/</code> directory and include
+<p>You can either use the build from inside the <code>dist/</code> directory and include
 it via <code>&#x3C;script></code>-tag or use <code>require</code> / <code>import</code>-syntax in your code.</p>
 <pre class='hljs'>&lt;html lang="en"&gt;
   &lt;head&gt;&lt;/head&gt;
@@ -101,52 +119,17 @@ it via <code>&#x3C;script></code>-tag or use <code>require</code> / <code>import
 <pre class='hljs'><span class="hljs-keyword">import</span> { isString } <span class="hljs-keyword">from</span> <span class="hljs-string">'vally'</span>
 
 isString(<span class="hljs-number">1</span>) <span class="hljs-comment">// =&gt; false</span></pre>
-<h2>Usage</h2>
-<p><strong>vally</strong> itself does only provide the helper functions needed to validate and
-render an error class if a validation for a field fails.
-Therefore you need to prepare your HTML in advance.
-<em>(<strong>Note:</strong> I do plan to add
-insertion of custom HTML-templates for advanced use cases in the future)</em></p>
-<h3>Example</h3>
-<pre class='hljs'>&lt;html lang="en"&gt;
-  &lt;head&gt;&lt;/head&gt;
-  &lt;body&gt;
-    &lt;form class="js-my-container"&gt;
-      &lt;input type="text" name="name" id="js-name"&gt;
-      &lt;input type="text" name="mail" id="js-mail"&gt;
-    &lt;/form&gt;
-  &lt;/body
-&lt;/html</pre>
-<pre class='hljs'><span class="hljs-keyword">import</span> {
-  validate,
-  isNoneEmptyString,
-  isEmail
-} <span class="hljs-keyword">from</span> <span class="hljs-string">'vally'</span>
-
-<span class="hljs-keyword">const</span> isValid = validate({
-  <span class="hljs-attr">containerSelector</span>: <span class="hljs-string">'.js-my-container'</span>,
-  <span class="hljs-attr">fields</span>: [
-    {
-      <span class="hljs-attr">selector</span>: <span class="hljs-string">'#js-name'</span>,
-      <span class="hljs-attr">validators</span>: [ isNoneEmptyString ]
-    },
-    {
-      <span class="hljs-attr">selector</span>: <span class="hljs-string">'#js-mail'</span>,
-      <span class="hljs-attr">validators</span>: [ isEmail ]
-    }
-  ]
-})
-<span class="hljs-comment">// if all validation checks pass =&gt; returns true</span>
-<span class="hljs-comment">// else =&gt; returns false and an 'error' class is added to the respective &lt;input&gt;</span></pre>
 <h2>API</h2>
 <h3>Docs</h3>
 <p>Configuration and API details can be found here:</p>
-<p><a href="https://on3iro.github.io/vally"><img src="https://img.shields.io/badge/docs-API-39CCCC.svg" alt="api docs"></a></p>
+<p><a href="https://on3iro.github.io/vally">API docs</a></p>
 <h2>FAQ</h2>
 <h3>How can i specify a field as <em>required</em>?</h3>
 <blockquote>
 <p>Just use the regular <em><a href="https://developer.mozilla.org/de/docs/Web/HTML/Element/Input#attr-required">required</a></em>-Attribute
-on your <code>&#x3C;input></code>.</p>
+on your <code>&#x3C;input></code>. This will ensure that <strong>vally</strong> actually validates the element if the input is empty.
+You still have to specify validator functions to provide the actual validation functionality.
+I.e. if the field should not be empty use <code>isNoneEmptyString()</code>.</p>
 </blockquote>
 <h3>What happens to inputs that are not displayed?</h3>
 <blockquote>
@@ -155,18 +138,289 @@ simply ignored by the validation.</p>
 </blockquote>
 <h3>How can I bind vally to certain events?</h3>
 <blockquote>
-<p>There are multiple ways to use <em>vally</em>.
-Case <strong>1.</strong> and <strong>2.</strong> give you the most control over when vally is called (i.e. by binding it on the submit event).
-Case <strong>3.</strong> handles the common case of validating on blur.</p>
-<ol>
-<li>Just call the <code>validate()</code>-function somewhere inside your event listener</li>
-<li>If you want to use a validate function with the same configuration on different parts of your code
-create a pre-configured <code>validate()</code>-function by calling <code>makeValidate(config)</code>. This function can then
-be used / passed around.</li>
-<li>You can use <code>makeValidationWithBindings()</code> to create a function which initializes automatic validation for every field you specified to fire on a DOM-event. This function also returns an array of <code>removeEventListeners</code> in case you want to get rid of
-the listeners later on.</li>
-</ol>
+<p><strong>vally</strong> leaves most of the DOM-manipulation to the user. For simple bindings (i.e. for 'keyup'-events)
+however you can use <code>initWithBindings()</code>. For detailed explaination have a look at our examples below.</p>
 </blockquote>
+<h3>Why does vally ship so few validator functions?</h3>
+<blockquote>
+<p>Because validators in <strong>vally</strong> are simple functions it is very
+easy to either write them yourself our just use a library like
+<a href="https://github.com/chriso/validator.js/">validator.js</a>.
+Providing only a basic set of functions keeps the footprint of the library small.</p>
+</blockquote>
+<h3>How can I use a validator function with multiple arguments?</h3>
+<blockquote>
+<p>If you need multiple arguments (like some <a href="https://github.com/chriso/validator.js/">validator.js</a>. functions need additional configuration) you can simply
+partially apply the function and return a validator function.</p>
+</blockquote>
+<h4>Example:</h4>
+<pre class='hljs'><span class="hljs-keyword">const</span> isLessThan = <span class="hljs-function">(<span class="hljs-params">num: number</span>) =&gt;</span> (val: any):<span class="hljs-function"><span class="hljs-params">boolean</span> =&gt;</span> { <span class="hljs-comment">/* actual implementation */</span> }</pre>
+<h2>Examples</h2>
+<h3>Simple Example</h3>
+<pre class='hljs'><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Simple submit<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-tag">input</span> {
+        <span class="hljs-attribute">outline</span>: none;
+        <span class="hljs-attribute">box-shadow</span>: none;
+      }
+
+      <span class="hljs-selector-class">.error</span> {
+        <span class="hljs-attribute">background</span>: red;
+      }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"myform"</span> <span class="hljs-attr">action</span>=<span class="hljs-string">""</span> <span class="hljs-attr">method</span>=<span class="hljs-string">""</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"number"</span>&gt;</span>Some number:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"number"</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"mail"</span>&gt;</span>Mail*:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"mail"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">required</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"custom"</span>&gt;</span>Custom (start with 'T')*:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"custom"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"custom"</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"vally.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+
+<span class="hljs-keyword">const</span> mail = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'mail'</span>)
+<span class="hljs-keyword">const</span> number = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'number'</span>)
+<span class="hljs-keyword">const</span> submit = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'submit'</span>)
+<span class="hljs-keyword">const</span> custom = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'custom'</span>)
+
+<span class="hljs-keyword">if</span> (mail &amp;&amp; number &amp;&amp; submit &amp;&amp; custom) {
+  submit.addEventListener(<span class="hljs-string">'click'</span>, (e) =&gt; {
+    e.preventDefault()
+
+    <span class="hljs-comment">// Simple custom validator function which ensures, that the value</span>
+    <span class="hljs-comment">// starts with the character 'T'</span>
+    <span class="hljs-keyword">const</span> startsWithT = <span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> val.charAt(<span class="hljs-number">0</span>) === <span class="hljs-string">'T'</span>
+
+    <span class="hljs-keyword">const</span> result = vally.validate({
+      <span class="hljs-attr">fields</span>: [
+        {
+          <span class="hljs-attr">node</span>: mail,
+          <span class="hljs-attr">validators</span>: [ { <span class="hljs-attr">fn</span>: vally.isEmail } ]
+        },
+        {
+          <span class="hljs-attr">node</span>: number,
+          <span class="hljs-attr">validators</span>: [ { <span class="hljs-attr">fn</span>: vally.isNumberString } ]
+        },
+        {
+          <span class="hljs-attr">node</span>: custom,
+          <span class="hljs-attr">validators</span>: [ { <span class="hljs-attr">fn</span>: startsWithT }]
+        }
+      ]
+    })
+
+    <span class="hljs-comment">// Set 'error' class to each invalid input</span>
+    result.validations.map(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!v.isValid) {
+        v.node.classList.add(<span class="hljs-string">'error'</span>)
+      } <span class="hljs-keyword">else</span> {
+        v.node.classList.remove(<span class="hljs-string">'error'</span>)
+      }
+    })
+  })
+}
+
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></pre>
+<h3>Complex example</h3>
+<p>The following example shows how <strong>vally</strong> can be used to use the same configuration
+to manually validate on the <code>submit</code> event and also bind it to
+fire on <code>keyup</code> triggered by individual inputs.</p>
+<h4>index.html</h4>
+<p>Lets use almost the same markup as before... . This time we ship <strong>vally</strong> bundled together
+with our other js resources in <code>main.bundle.js</code>, though. We also want to insert
+custom error messages into the DOM depending on which validator for a field failed.
+There are a lot of ways to achieve this. In this case we simply put hidden divs
+below each input and toggle their <code>display</code> on validation.
+Of course we also insert our custom messages into them.</p>
+<pre class='hljs'><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Simple submit<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-tag">input</span> {
+        <span class="hljs-attribute">outline</span>: none;
+        <span class="hljs-attribute">box-shadow</span>: none;
+      }
+
+      <span class="hljs-selector-class">.error</span> {
+        <span class="hljs-attribute">background</span>: red;
+      }
+
+      <span class="hljs-selector-class">.hidden</span> {
+        <span class="hljs-attribute">display</span>: none;
+      }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"myform"</span> <span class="hljs-attr">action</span>=<span class="hljs-string">""</span> <span class="hljs-attr">method</span>=<span class="hljs-string">""</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"number"</span>&gt;</span>Some number:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"number"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"number-error"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hidden"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"mail"</span>&gt;</span>Mail(*):<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"mail"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">required</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"mail-error"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hidden"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"custom"</span>&gt;</span>Number below 10(*):<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"custom"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"custom"</span> <span class="hljs-attr">required</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"custom-error"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hidden"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">'./main.bundle.js'</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></pre>
+<h4>config.js</h4>
+<p>We separate our configuraion from the actual validation logic, to make everything
+a bit more maintainable.</p>
+<pre class='hljs'><span class="hljs-comment">// config.js</span>
+
+<span class="hljs-keyword">import</span> {
+  createConfig,
+  isEmail,
+  isNoneEmptyString,
+  isNumberString
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'vally'</span>
+
+<span class="hljs-comment">// Custom validator</span>
+<span class="hljs-comment">// Because we need another parameter for our function to specify the threshold,</span>
+<span class="hljs-comment">// we simply curry our validator function. The actual invokation to get a</span>
+<span class="hljs-comment">// real validator function would look like this: isLessThan(10)</span>
+<span class="hljs-keyword">const</span> isLessThan = <span class="hljs-function">(<span class="hljs-params">num: number</span>) =&gt;</span> (val: any): <span class="hljs-function"><span class="hljs-params">boolean</span> =&gt;</span> {
+  <span class="hljs-keyword">if</span> (isNumberString(val)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">parseInt</span>(val) &lt; num
+}
+
+<span class="hljs-comment">// Because we only want to fetch DOM-elements via document.querySelector</span>
+<span class="hljs-comment">// we can use the createConfig helper function to create a valid configuration.</span>
+<span class="hljs-comment">// Therefore we specify our specs with selectors, which in turn are used to</span>
+<span class="hljs-comment">// fetch the actual DOM nodes</span>
+<span class="hljs-keyword">const</span> specs = [
+  {
+    <span class="hljs-attr">selector</span>: <span class="hljs-string">'#mail'</span>,
+    <span class="hljs-attr">validators</span>: [
+      {
+        <span class="hljs-attr">fn</span>: isNoneEmptyString,
+        <span class="hljs-attr">errorSelector</span>: <span class="hljs-string">'mail-error'</span>,
+        <span class="hljs-attr">msg</span>: <span class="hljs-string">'Please enter a value.'</span>
+      },
+      {
+        <span class="hljs-attr">fn</span>: isEmail,
+        <span class="hljs-attr">errorSelector</span>: <span class="hljs-string">'mail-error'</span>,
+        <span class="hljs-attr">msg</span>: <span class="hljs-string">'Please enter a valid email address.'</span>
+      }
+    ]
+  },
+  {
+    <span class="hljs-attr">selector</span>: <span class="hljs-string">'#number'</span>,
+    <span class="hljs-attr">validators</span>: [{
+      <span class="hljs-attr">fn</span>: isNumberString,
+      <span class="hljs-attr">errorSelector</span>: <span class="hljs-string">'number-error'</span>,
+      <span class="hljs-attr">msg</span>: <span class="hljs-string">'Please enter a number.'</span>
+    }]
+  },
+  {
+    <span class="hljs-attr">selector</span>: <span class="hljs-string">'#custom'</span>,
+    <span class="hljs-attr">validators</span>: [
+      {
+        <span class="hljs-attr">fn</span>: isNoneEmptyString,
+        <span class="hljs-attr">errorSelector</span>: <span class="hljs-string">'custom-error'</span>,
+        <span class="hljs-attr">msg</span>: <span class="hljs-string">'Please enter a value.'</span>
+      },
+      {
+        <span class="hljs-attr">fn</span>: isLessThan(<span class="hljs-number">10</span>),
+        <span class="hljs-attr">errorSelector</span>: <span class="hljs-string">'custom-error'</span>,
+        <span class="hljs-attr">msg</span>: <span class="hljs-string">'Please enter a number smaller than ten.'</span>
+      }
+    ]
+  }
+]
+
+<span class="hljs-keyword">export</span> config = createConfig(specs)</pre>
+<h4>index.js</h4>
+<p>Here we will define our actual validation logic.</p>
+<pre class='hljs'><span class="hljs-comment">// index.js</span>
+
+<span class="hljs-keyword">import</span> {
+  initWithBindings,
+  validate
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'vally'</span>
+
+<span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">'./config'</span>
+
+<span class="hljs-comment">// Our callback will recieve a result object and act on its field validations</span>
+<span class="hljs-keyword">const</span> callback = (e: Event, { validations }: { <span class="hljs-attr">validations</span>: Valiations }): <span class="hljs-function"><span class="hljs-params">void</span> =&gt;</span> {
+  validations.forEach(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> msgNode = <span class="hljs-built_in">document</span>.getElementById(v.validator.errorSelector)
+
+    <span class="hljs-keyword">if</span> (v.isValid) {
+      v.node.classList.remove(<span class="hljs-string">'error'</span>)
+
+      <span class="hljs-comment">// Hide msg</span>
+      <span class="hljs-keyword">if</span> (msgNode ) msgNode.classList.add(<span class="hljs-string">'hidden'</span>)
+    } <span class="hljs-keyword">else</span> {
+      v.node.classList.add(<span class="hljs-string">'error'</span>)
+
+      <span class="hljs-comment">// Show error msg</span>
+      <span class="hljs-keyword">if</span> (msgNode) {
+        msgNode.classList.remove(<span class="hljs-string">'hidden'</span>)
+        msgNode.innerHTML = v.validator.msg
+      }
+    }
+  })
+}
+
+<span class="hljs-comment">// Create a pre-configured partially applied validate function that we can use</span>
+<span class="hljs-comment">// on our submit button. We technically don't need to do this</span>
+<span class="hljs-comment">// as we only need to validate on submit. But in a real-world application you might</span>
+<span class="hljs-comment">// need to re-use your validate function</span>
+<span class="hljs-comment">// and this makes it easier.</span>
+<span class="hljs-keyword">const</span> validateForm = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> validate(config)
+
+<span class="hljs-keyword">const</span> init = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-comment">// Bind our callback to the keyup event on each individual field</span>
+  initWithBindings(config, <span class="hljs-string">'keyup'</span>, callback, <span class="hljs-number">100</span>)
+
+  <span class="hljs-comment">// Bind our validate function to our submit button</span>
+  <span class="hljs-keyword">const</span> btnSubmit = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'submit'</span>)
+  <span class="hljs-keyword">if</span> (!btnSubmit) <span class="hljs-keyword">return</span>
+
+  btnSubmit.addEventListener(<span class="hljs-string">'click'</span>, (e) =&gt; {
+    e.preventDefault()
+
+    <span class="hljs-keyword">const</span> result = validateForm()
+
+    <span class="hljs-keyword">if</span> (result.isValid) {
+      <span class="hljs-comment">// logic to send our form</span>
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// React to our validation result</span>
+      callback(e, result)
+    }
+
+  })
+}
+
+init()</pre>
 </div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="types"></a>Types</h1><div><p>Vally's documentation makes heavy use of types.
 If certain parameters or return values are unclear, please refer to this section.</p>
 <h2>ValidatorFn</h2>
@@ -211,7 +465,7 @@ If any field failed, the whole validation is marked as invalid.</p>
   isValid: boolean,
   <span class="hljs-attr">validations</span>: <span class="hljs-built_in">Array</span>&lt;Validation&gt;
 |}</pre>
-</div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="createconfig"></a>createConfig<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/createConfig.js#L16-L44" title="src/createConfig.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>This is just a simple helper/wrapper function to automatically fetch
+</div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="createconfig"></a>createConfig<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/createConfig.js#L16-L44" title="src/createConfig.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>This is just a simple helper/wrapper function to automatically fetch
 single nodes and return a valid configuration. Instead of directly
 passing in the nodes, the configuration will expect a selector-string
 for each of the specified fields. Behind the scenes createConfig will
@@ -220,7 +474,7 @@ config. If a node cannot be found, a console warning is emitted and the
 field will be skipped.</p>
 </div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>specs: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;{selector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, validators: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Validator>}></code>:  <div style="display:inline-block;" data-radium="true">Specifications that describe each field and their corresponding Validators
 </div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code>Config</code><span> a valid vally config to use with vally.validate, vally.initWithBindings etc.
-</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="initwithbindings"></a>initWithBindings<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/initWithBindings.js#L29-L47" title="src/initWithBindings.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Adds an eventListener to each given node. The listener is wrapped
+</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="initwithbindings"></a>initWithBindings<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/initWithBindings.js#L29-L47" title="src/initWithBindings.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Adds an eventListener to each given node. The listener is wrapped
 with a debounce function and will invoke the callback when the specified
 event is triggered.
 An array of removeEventListener functions is returned, so listeners could
@@ -229,7 +483,7 @@ be removed if necesseary.</p>
 </div></li></div><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true">event to be bound to
 </div></li></div><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>debounceTime: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> (=0)</code>:  <div style="display:inline-block;" data-radium="true">time to debounce callback invocation (in ms)
 </div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code><span> RemoveListeners
-</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validate"></a>validate<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validate.js#L28-L60" title="src/validate.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Validates a list of HTMLInput/HTMLSelect elements and returns the result of
+</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validate"></a>validate<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/validate.js#L28-L60" title="src/validate.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Validates a list of HTMLInput/HTMLSelect elements and returns the result of
 the validation. Each element value will be piped through the specified list
 of validator functions. If validation fails at any point, it will be represented
 inside the respective validation object.</p>
@@ -240,19 +494,19 @@ inside the respective validation object.</p>
 <li>if validation.isValid is false, the failing validator will be returned, so that it is possible to react
 on a specific failing validator</li>
 </ul>
-</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validatenode"></a>validateNode<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validateNode.js#L19-L35" title="src/validateNode.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Validates a single node by passing it to each of the specified validator
+</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validatenode"></a>validateNode<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/validateNode.js#L19-L35" title="src/validateNode.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div><p>Validates a single node by passing it to each of the specified validator
 functions.</p>
 </div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>definition: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li><li style="padding-bottom:13px;" data-radium="true"><code>definition.validators: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Validator></code>:  <div style="display:inline-block;" data-radium="true">Contains objects each representing
 a single validator. A validator should always have an 'fn'-property with
 a function of the type (val: any) => boolean. You can specify other properties
 on the object as needed.
 </div></li><li style="padding-bottom:13px;" data-radium="true"><code>definition.node: any</code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code>{isValid: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, node: <a href="https://developer.mozilla.org/docs/Web/API/Node/nextSibling">Node</a>?, validator: Validator?}</code><span> 
-</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validators"></a>validators<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L7-L7" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div></div><div data-radium="true"><h2 style="text-transform:uppercase;" data-radium="true">static</h2><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisempty"></a>validators.isEmpty<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L61-L61" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isEmpty(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"><p>Validates if a value is undefined or its length === 0</p>
+</span></div></div></div><div style="margin-bottom:104px;" data-radium="true"><h1 data-radium="true"><a class="anchor" name="validators"></a>validators<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/validatorFns.js#L7-L7" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h1><div></div><div data-radium="true"><h2 style="text-transform:uppercase;" data-radium="true">static</h2><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisempty"></a>validators.isEmpty<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/validatorFns.js#L61-L61" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isEmpty(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"><p>Validates if a value is undefined or its length === 0</p>
 </div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
-</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisstring"></a>validators.isString<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L81-L81" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
-</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisnoneemptystring"></a>validators.isNoneEmptyString<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L89-L89" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isNoneEmptyString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
-</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisnumberstring"></a>validators.isNumberString<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L97-L101" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isNumberString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
-</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisemail"></a>validators.isEmail<a href="https://github.com/on3iro/vally/blob/3d0338af908770175cee9508f01e278e813a5356/src/validatorFns.js#L109-L113" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isEmail(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisstring"></a>validators.isString<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/validatorFns.js#L81-L81" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisnoneemptystring"></a>validators.isNoneEmptyString<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/validatorFns.js#L89-L89" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isNoneEmptyString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisnumberstring"></a>validators.isNumberString<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/validatorFns.js#L97-L101" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isNumberString(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
+</span></div></div></div><div style="margin-bottom:52px;" data-radium="true"><h3 data-radium="true"><a class="anchor" name="validatorsisemail"></a>validators.isEmail<a href="https://github.com/on3iro/vally/blob/9088daaacc30844c15915498f516030c258842d0/src/validatorFns.js#L109-L113" title="src/validatorFns.js" style="float:right;" data-radium="true"><svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1em" width="1em" viewBox="0 0 40 40" style="vertical-align:middle;"><g><path d="m26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z"></path></g></svg></a></h3><pre><code>isEmail(val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code></pre><div style="margin-top:13px;margin-bottom:13px;" data-radium="true"></div><div data-radium="true"><h4>Parameters</h4><ol style="list-style:none;margin-left:0;padding-left:0;" data-radium="true"><div data-radium="true"><li style="padding-bottom:13px;" data-radium="true"><code>val: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:  <div style="display:inline-block;" data-radium="true"></div></li></div></ol></div><div data-radium="true"><h4>Returns</h4><div data-radium="true"><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code><span> 
 </span></div></div></div></div></div></div></div><div style="clear:both;" data-radium="true"></div></div><div style="clear:both;" data-radium="true"></div></div><style>@media (min-width: 768px) and (max-width: 991px){ .rmq-87b609c0{width: 750px !important;}}
 @media (min-width: 992px) and (max-width: 1199px){ .rmq-159a7c96{width: 970px !important;}}
 @media (min-width: 1200px){ .rmq-27601239{width: 1170px !important;}}

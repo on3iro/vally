@@ -16,13 +16,6 @@ and validation handling still lies in the hands of the user to ensure as much
 flexibility as possible.
 
 
-**ANNOUNCEMENT:**
-
->At this point I would currently advise against the use of vally. I am working heavily on a rewrite, which should be out
-in a couple of days. This **v2.0.0** will contain a lot of breaking changes, but will make this library
-way more flexible. If the current state of _vally_ is exactly what you are looking for, feel free to continue
-using it (or just fork it). However I will not continue to develop **v1.x.x**.
-
 <!-- vim-markdown-toc GFM -->
 
 * [Installation](#installation)

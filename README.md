@@ -22,6 +22,7 @@ flexibility as possible.
 * [API](#api)
   * [Docs](#docs)
 * [FAQ](#faq)
+  * [Why not just use HTML5 validation?](#why-not-just-use-html5-validation)
   * [How can i specify a field as _required_?](#how-can-i-specify-a-field-as-_required_)
   * [What happens to inputs that are not displayed?](#what-happens-to-inputs-that-are-not-displayed)
   * [How can I bind vally to certain events?](#how-can-i-bind-vally-to-certain-events)
@@ -78,6 +79,15 @@ Configuration and API details can be found here:
 
 
 ## FAQ
+
+### Why not just use HTML5 validation?
+
+HTML5 validation sometimes is a bit lacking when it comes to customizability
+and validating with custom constraints. That's not to say it is bad - especially
+since it is now supported by all [major browsers](https://caniuse.com/#feat=form-validation).
+In fact it is good practice to still use HTML5 type constraints on your fields
+(i.e. `type="number"`) in conjunction with **vally** to provide the best possible experience to your users.
+
 
 ### How can i specify a field as _required_?
 

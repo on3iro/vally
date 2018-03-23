@@ -15,11 +15,16 @@ export type Validator = {
 export type Node = HTMLInputElement | HTMLSelectElement
 
 export type Definition = {|
-  node: Node | Array<Node>,
+  node: Node,
   validators: Array<Validator>
 |}
 
 export type Fields = Array<Definition>
+
+export type NestedFields = Array<{|
+  node: Node | Array<Node>,
+  validators: Array<Validator>
+|}>
 
 export type Validation = {|
   isValid: boolean,

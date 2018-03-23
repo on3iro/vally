@@ -4,6 +4,7 @@ import validate from './validate'
 import validateNode from './validateNode'
 import initWithBindings from './initWithBindings'
 import createConfig from './createConfig'
+import flattenFields from './flattenFields'
 
 import {
   isEmail,
@@ -24,5 +25,7 @@ export {
   validateNode,
   validate,
   initWithBindings,
-  createConfig
+  // helpers
+  createConfig,
+  flattenFields
 }

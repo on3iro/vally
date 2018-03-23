@@ -9,22 +9,6 @@ import type {
 
 import { isEmpty } from './validatorFns'
 
-const flattenFields = (fields) => fields.reduce((acc, f) => {
-  if (Array.isArray(f.node)) {
-    console.log(acc)
-    const flattenedFields = f.node.map(n => {
-      return {
-        node: n,
-        validators: f.validators
-      }
-    })
-
-    return [ ...acc, ...flattenedFields ]
-  }
-
-  return [ ...acc, f ]
-}, [])
-
 /**
   * Validates a list of HTMLInput/HTMLSelect elements and returns the result of
   * the validation. Each element value will be piped through the specified list
@@ -42,8 +26,7 @@ const flattenFields = (fields) => fields.reduce((acc, f) => {
   *   on a specific failing validator
   */
 const validate = ({ fields }: Config): Result => {
-  const flattenedFields = flattenFields(fields)
-  const validations = flattenedFields.map(f => {
+  const validations = fields.map(f => {
     if (!f.node) {
       console.warn('vally, validate: passed node is undefined! Please check your field definitions.')
 

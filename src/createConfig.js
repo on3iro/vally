@@ -23,14 +23,21 @@ const createConfig = (specs: Array<{
     fields: specs.reduce((acc, spec) => {
       const node = document.querySelector(spec.selector)
 
-      if (!(
-        node &&
-        (
-          node.mock ||
-          (node instanceof HTMLInputElement || node instanceof HTMLSelectElement)
-        )
-      )) {
+      if (!node) {
         console.warn(`vally, createConfig: node with selector "${spec.selector}" could not be found!`)
+
+        return acc
+      }
+
+      // $FlowFixMe
+      const { mock } = node
+      const isInputOrSelect = (
+        node instanceof HTMLInputElement ||
+        node instanceof HTMLSelectElement
+      )
+
+      if (!mock && !isInputOrSelect) {
+        console.warn(`vally, createConfig: node with selector "${spec.selector}" is not a valid input/select Element!`)
 
         return acc
       }

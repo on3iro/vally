@@ -23,7 +23,7 @@ export const flattenFields = (nestedFields: NestedFields): Fields =>
     } ]
   }, [])
 
-export const mergeFields = (fields: Fields) => fields.reduce((acc, f, i, arr) => {
+export const mergeFields = (fields: Fields): Fields => fields.reduce((acc, f, i, arr) => {
   const node = f.node
 
   const isFirstIteration = i === 0
@@ -54,6 +54,6 @@ export const mergeFields = (fields: Fields) => fields.reduce((acc, f, i, arr) =>
   ]
 }, [])
 
-const flattenAndMerge = (fields: Fields) => mergeFields(flattenFields(fields))
+const flattenAndMerge = (fields: NestedFields) => mergeFields(flattenFields(fields))
 
 export default flattenAndMerge

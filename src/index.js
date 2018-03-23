@@ -27,5 +27,5 @@ export {
   initWithBindings,
   // helpers
   createConfig,
-  flattenFields
+  flattenAndMerge
 }

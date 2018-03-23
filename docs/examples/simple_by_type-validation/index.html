@@ -113,11 +113,6 @@ if (mail && number && submit && customNodes.length) {
 
     const mergedFields = mergeFields(fields)
 
-    console.log({
-      fields,
-      mergedFields
-    })
-
     const config = { fields: mergedFields }
 
     const result = vally.validate(config)

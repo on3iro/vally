@@ -328,6 +328,36 @@
     }, []);
   };
 
+  var mergeFields = function mergeFields(fields) {
+    return fields.reduce(function (acc, f, i, arr) {
+      var node = f.node;
+
+      var isFirstIteration = i === 0;
+      var tail = isFirstIteration ? arr.slice(i + 1) : acc.slice(i + 1);
+
+      if (!tail.length) return acc;
+
+      var head = isFirstIteration ? [] : acc.slice(0, i);
+
+      var duplicates = tail.filter(function (el) {
+        return el.node === node;
+      });
+      var validators = [].concat(toConsumableArray(f.validators), toConsumableArray(duplicates.reduce(function (a, el) {
+        return [].concat(toConsumableArray(a), toConsumableArray(el.validators));
+      }, [])));
+
+      var rest = tail.filter(function (el) {
+        return el.node !== node;
+      });
+
+      return [].concat(toConsumableArray(head), [{ node: node, validators: validators }], toConsumableArray(rest));
+    }, []);
+  };
+
+  var flattenAndMerge = function flattenAndMerge(fields) {
+    return mergeFields(flattenFields(fields));
+  };
+
   exports.isEmail = isEmail;
   exports.isEmpty = isEmpty;
   exports.isNoneEmptyString = isNoneEmptyString;
@@ -337,7 +367,7 @@
   exports.validate = validate;
   exports.initWithBindings = initWithBindings;
   exports.createConfig = createConfig;
-  exports.flattenFields = flattenFields;
+  exports.flattenAndMerge = flattenAndMerge;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

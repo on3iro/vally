@@ -61,7 +61,7 @@ if (mail && number && submit && customNodes.length) {
     const startsWithT = (val) => val.charAt(0) === 'T'
     const endsWithO = (val) => val.charAt(val.length - 1) === 'O'
 
-    const fields = vally.flattenFields([
+    const fields = vally.flattenAndMerge([
       {
         nodeDef: mail,
         validators: [ { fn: vally.isEmail } ]
@@ -80,10 +80,7 @@ if (mail && number && submit && customNodes.length) {
       }
     ])
 
-
-    const mergedFields = mergeFields(fields)
-
-    const config = { fields: mergedFields }
+    const config = { fields }
 
     const result = vally.validate(config)
 

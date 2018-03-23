@@ -15,7 +15,7 @@ export type Validator = {
 export type Node = HTMLInputElement | HTMLSelectElement
 
 export type Definition = {|
-  node: Node,
+  node: Node | Array<Node>,
   validators: Array<Validator>
 |}
 

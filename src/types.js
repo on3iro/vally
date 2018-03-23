@@ -22,7 +22,7 @@ export type Definition = {|
 export type Fields = Array<Definition>
 
 export type NestedFields = Array<{|
-  node: Node | Array<Node>,
+  nodeDef: Node | Array<Node>,
   validators: Array<Validator>
 |}>
 

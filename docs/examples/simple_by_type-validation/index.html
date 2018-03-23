@@ -29,8 +29,8 @@
       <br>
       <br>
 
-      <label for="custom-1">Custom (start with 'T')*:</label>
-      <input id="custom-1" class="js-custom" type="text" name="custom">
+      <label for="custom-1">Custom (start with 'T', ends with 'O')*:</label>
+      <input id="custom-1" class="js-custom js-with-O" type="text" name="custom">
 
       <label for="custom-2">Custom (start with 'T')*:</label>
       <input id="custom-2" class="js-custom" type="text" name="custom">
@@ -51,30 +51,40 @@
 const mail = document.getElementById('mail')
 const number = document.getElementById('number')
 const submit = document.getElementById('submit')
-const customNodes = document.querySelectorAll('.js-custom')
+const customNodes = [ ...document.querySelectorAll('.js-custom') ]
+const endsWithONode = document.querySelector('.js-with-O')
 
 if (mail && number && submit && customNodes.length) {
   submit.addEventListener('click', (e) => {
     e.preventDefault()
 
     const startsWithT = (val) => val.charAt(0) === 'T'
+    const endsWithO = (val) => val.charAt(val.length - 1) === 'O'
 
-    const result = vally.validate({
-      fields: [
-        {
-          node: mail,
-          validators: [ { fn: vally.isEmail } ]
-        },
-        {
-          node: number,
-          validators: [ { fn: vally.isNumberString } ]
-        },
-        {
-          node: customNodes,
-          validators: [ { fn: startsWithT }]
-        }
-      ]
-    })
+    const fields = vally.flattenFields([
+      {
+        nodeDef: mail,
+        validators: [ { fn: vally.isEmail } ]
+      },
+      {
+        nodeDef: number,
+        validators: [ { fn: vally.isNumberString } ]
+      },
+      {
+        nodeDef: customNodes,
+        validators: [ { fn: startsWithT }]
+      },
+      {
+        nodeDef: endsWithONode,
+        validators: [ { fn: endsWithO }]
+      }
+    ])
+
+    console.log({ fields })
+
+    const config = { fields }
+
+    const result = vally.validate(config)
 
     result.validations.map(v => {
       if (!v.isValid) {

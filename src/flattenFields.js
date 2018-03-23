@@ -4,12 +4,12 @@ import type { Fields, NestedFields } from './types'
 
 const flattenFields = (nestedFields: NestedFields): Fields =>
   nestedFields.reduce((acc, f) => {
-    const { node } = f
+    const { nodeDef } = f
 
-    if (node instanceof Array) {
-      const flattenedFields = node.map(n => {
+    if (nodeDef instanceof Array) {
+      const flattenedFields = nodeDef.map(node => {
         return {
-          node: n,
+          node,
           validators: f.validators
         }
       })
@@ -17,7 +17,10 @@ const flattenFields = (nestedFields: NestedFields): Fields =>
       return [ ...acc, ...flattenedFields ]
     }
 
-    return [ ...acc, f ]
+    return [ ...acc, {
+      node: nodeDef,
+      validators: f.validators
+    } ]
   }, [])
 
 export default flattenFields

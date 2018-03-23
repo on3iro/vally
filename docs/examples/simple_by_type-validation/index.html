@@ -80,9 +80,45 @@ if (mail && number && submit && customNodes.length) {
       }
     ])
 
-    console.log({ fields })
+    const mergeFields = (fields) => fields.reduce((acc, f, i, arr) => {
+      const node = f.node
 
-    const config = { fields }
+      const isFirstIteration = i === 0
+      const tail = isFirstIteration
+        ? arr.slice(i + 1)
+        : acc.slice(i + 1)
+
+      if (!tail.length) return acc
+
+      const head = isFirstIteration
+        ? []
+        : acc.slice(0, i)
+
+      const duplicates = tail.filter(el => el.node === node)
+      const validators = [
+        ...f.validators,
+        ...duplicates.reduce((a, el) => {
+          return [ ...a, ...el.validators ]
+        }, [])
+      ]
+
+      const rest = tail.filter(el => el.node !== node)
+
+      return [
+        ...head,
+        { node, validators },
+        ...rest
+      ]
+    }, [])
+
+    const mergedFields = mergeFields(fields)
+
+    console.log({
+      fields,
+      mergedFields
+    })
+
+    const config = { fields: mergedFields }
 
     const result = vally.validate(config)
 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Simple submit</title>
+    <style>
+      input {
+        outline: none;
+        box-shadow: none;
+      }
+
+      .error {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="myform" action="" method="">
+      <label for="number">Some number:</label>
+      <input id="number" type="text" name="number">
+
+      <br>
+      <br>
+
+      <label for="mail">Mail*:</label>
+      <input id="mail" type="text" name="email" required>
+
+      <br>
+      <br>
+
+      <label for="custom-1">Custom (start with 'T', ends with 'O')*:</label>
+      <input id="custom-1" class="js-custom js-with-O" type="text" name="custom">
+
+      <label for="custom-2">Custom (start with 'T')*:</label>
+      <input id="custom-2" class="js-custom" type="text" name="custom">
+
+      <label for="custom-3">Custom (start with 'T')*:</label>
+      <input id="custom-3" class="js-custom" type="text" name="custom">
+
+      <br>
+      <br>
+
+      <button id="submit" type="submit">Submit</button>
+    </form>
+
+    <script src="../../../dist/vally.min.js"></script>
+
+<script>
+
+const mail = document.getElementById('mail')
+const number = document.getElementById('number')
+const submit = document.getElementById('submit')
+const customNodes = [ ...document.querySelectorAll('.js-custom') ]
+const endsWithONode = document.querySelector('.js-with-O')
+
+if (mail && number && submit && customNodes.length) {
+  submit.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    const startsWithT = (val) => val.charAt(0) === 'T'
+    const endsWithO = (val) => val.charAt(val.length - 1) === 'O'
+
+    const fields = vally.flattenAndMerge([
+      {
+        nodeDef: mail,
+        validators: [ { fn: vally.isEmail } ]
+      },
+      {
+        nodeDef: number,
+        validators: [ { fn: vally.isNumberString } ]
+      },
+      {
+        nodeDef: customNodes,
+        validators: [ { fn: startsWithT }]
+      },
+      {
+        nodeDef: endsWithONode,
+        validators: [ { fn: endsWithO }]
+      }
+    ])
+
+    const config = { fields }
+
+    const result = vally.validate(config)
+
+    result.validations.map(v => {
+      if (!v.isValid) {
+        v.node.classList.add('error')
+      } else {
+        v.node.classList.remove('error')
+      }
+    })
+  })
+}
+
+</script>
+  </body>
+</html>

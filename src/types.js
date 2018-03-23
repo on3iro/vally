@@ -21,6 +21,11 @@ export type Definition = {|
 
 export type Fields = Array<Definition>
 
+export type NestedFields = Array<{|
+  nodeDef: Node | Array<Node>,
+  validators: Array<Validator>
+|}>
+
 export type Validation = {|
   isValid: boolean,
   node: Node,
